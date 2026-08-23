@@ -154,14 +154,13 @@ document.querySelectorAll('section, .rule-card, .ghost-card, .level').forEach(el
     });
   });
 
-  function getBounds() {
-    const w = window.innerWidth;
-    const h = document.body.scrollHeight;
+    function getBounds() {
+    const contentWrap = document.querySelector('.content-wrap');
+    if (!contentWrap) return { cols: 10, startRow: 0, endRow: 10 };
+    const w = contentWrap.clientWidth;
+    const h = contentWrap.clientHeight;
     const cols = Math.floor(w / CELL_SIZE);
     const rows = Math.floor(h / CELL_SIZE);
-    const startRow = Math.floor(window.scrollY / CELL_SIZE);
-    const endRow = startRow + Math.floor(window.innerHeight / CELL_SIZE);
-    // Actually, we want ghosts to spawn ANYWHERE on the document, so:
     return { cols, startRow: 0, endRow: rows };
   }
 
@@ -315,7 +314,7 @@ document.querySelectorAll('section, .rule-card, .ghost-card, .level').forEach(el
       ghostStates.forEach(g => {
         if (g.visible) {
           const d = dist(pacPos, g);
-          if (d < 3) {
+          if (d === 0) {
             hideGhost(g);
           } else {
             // Update emotions based on distance
