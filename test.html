@@ -1,0 +1,13 @@
+
+<html><body>
+<div id='container' style='position:relative; width:200px; height:200px; border:1px solid black;'>
+  <div id='div1' style='position:absolute; width:42px; height:42px; background:red;'></div>
+  <div id='div2' style='position:absolute; width:42px; height:42px; background:blue;'></div>
+</div>
+<script>
+  let r1 = document.getElementById('div1').getBoundingClientRect();
+  let r2 = document.getElementById('div2').getBoundingClientRect();
+  console.log('div1:', r1.top, r1.left);
+  console.log('div2:', r2.top, r2.left);
+</script>
+</body></html>
