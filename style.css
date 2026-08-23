@@ -58,8 +58,10 @@
     background-repeat:no-repeat;
     background-position:center;
     background-size:cover;
-    opacity:1;
+    opacity:.32;
     z-index:0;
+    pointer-events:none;
+    mask-image: linear-gradient(180deg, black 0%, black 60%, transparent 96%);
   }
 
   /* ---------- vertical logo strip (arcade cabinet side panel) ---------- */
