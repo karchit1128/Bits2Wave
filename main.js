@@ -14,8 +14,7 @@ if (burger && navLinks) {
 
 // ---- countdown ----
 // Set to a target date
-const TARGET_DATE = new Date();
-TARGET_DATE.setDate(TARGET_DATE.getDate() + 21);
+const TARGET_DATE = new Date('2026-09-15T00:00:00');
 
 function updateCountdown(){
   const now = new Date();

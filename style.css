@@ -169,7 +169,7 @@
 
   .hero-badges{
     display:flex; gap:10px; align-items:center; justify-content:center;
-    margin-bottom:26px; flex-wrap:wrap;
+    margin-top:-20px; margin-bottom:26px; flex-wrap:wrap;
   }
   .hero-badges span{
     font-size:10px; letter-spacing:1.5px; color:var(--dim);
@@ -304,11 +304,21 @@
   .btn{
     font-family:'Press Start 2P', monospace;
     font-size:11px;
-    padding:16px 22px;
+    padding: 16px 22px;
     text-decoration:none;
-    display:inline-block;
+    display:inline-flex;
+    align-items:center;
+    justify-content: center;
+    gap: 12px;
     cursor:pointer;
     transition:transform .12s ease;
+  }
+  .btn-icon{
+    font-size: 24px;
+    font-family: "Segoe UI Emoji", "Apple Color Emoji", sans-serif;
+  }
+  .btn-text, .btn-arr {
+    /* Relying on pure flexbox for natural alignment */
   }
   .btn-primary{
     background:var(--yellow); color:#0a0a0a;
