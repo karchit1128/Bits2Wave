@@ -553,26 +553,66 @@
 }
 
 .rule-card, .ghost-card, .level .content {
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important, box-shadow 0.3s ease !important, background 0.3s ease !important;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, background 0.3s ease;
   background: var(--panel-glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  cursor: default;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
 }
 
 .rule-card:hover, .ghost-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.4), 0 0 20px rgba(53, 230, 255, 0.3);
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 25px rgba(53, 230, 255, 0.4);
   z-index: 10;
-  position: relative;
+  background: rgba(20, 30, 80, 0.85);
 }
 
 .ghost-card:hover {
-  box-shadow: 0 12px 30px rgba(0,0,0,0.4), 0 0 20px rgba(255, 77, 141, 0.3);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 25px rgba(255, 77, 141, 0.4);
 }
 
 .level:hover .content {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4), 0 0 15px rgba(255, 212, 0, 0.2);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 20px rgba(255, 212, 0, 0.3);
+  background: rgba(20, 30, 80, 0.85);
 }
 
+
+/* ---- 3D Grid Lift Animation ---- */
+.grid-lift-box {
+  position: absolute;
+  width: 42px; height: 42px;
+  pointer-events: none;
+  z-index: 0;
+  
+  /* Match the exact color of the background so it hides the floor beneath */
+  background-color: var(--bg);
+  /* Match all 4 grid lines */
+  border: 1px solid var(--maze-dim);
+  box-sizing: border-box;
+  /* Dots at all 4 intersections */
+  background-image: 
+    radial-gradient(circle at 0 0, var(--maze) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 100% 0, var(--maze) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 0 100%, var(--maze) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 100% 100%, var(--maze) 1.5px, transparent 1.5px);
+  
+  /* Starts flat */
+  transform: translateY(0);
+  box-shadow: 0 0 0 transparent;
+  opacity: 0;
+  
+  /* Smooth physical lift transition */
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, opacity 0.1s ease;
+}
+
+.grid-lift-box.lifted {
+  /* Physical lift, no scale, just Z-axis translation */
+  transform: translateY(-6px);
+  /* Dark, realistic physical shadow, no neon glow */
+  box-shadow: -4px 8px 12px rgba(0, 0, 0, 0.9);
+  /* Slight opacity tweak if needed, but 1 keeps it solid over the floor */
+  opacity: 0.8;
+}

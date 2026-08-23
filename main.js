@@ -66,8 +66,69 @@ document.querySelectorAll('section, .rule-card, .ghost-card, .level').forEach(el
   const baseGhosts = document.querySelectorAll('.ghost');
   const bgAnimation = document.getElementById('bg-animation');
   const dotsContainer = document.getElementById('dots-container');
+  const gridHoverBox = document.getElementById('grid-hover-box');
   const activeDots = {};
   if (!pacman || baseGhosts.length === 0) return;
+
+  // Grid hover logic (Wave of physical blocks)
+  const liftedBoxes = {}; 
+  const liftContainer = document.createElement('div');
+  liftContainer.style.position = 'absolute';
+  liftContainer.style.inset = '0';
+  liftContainer.style.pointerEvents = 'none';
+  liftContainer.style.zIndex = '0';
+  document.querySelector('.content-wrap').appendChild(liftContainer);
+
+  let lastCol = -1, lastRow = -1;
+
+  document.addEventListener('mousemove', (e) => {
+    const contentWrap = document.querySelector('.content-wrap');
+    if (!contentWrap) return;
+    
+    const rect = contentWrap.getBoundingClientRect();
+    const offsetTop = rect.top + window.scrollY;
+    const offsetLeft = rect.left + window.scrollX;
+    
+    const x = e.pageX - offsetLeft;
+    const y = e.pageY - offsetTop;
+    
+    const col = Math.floor(x / CELL_SIZE);
+    const row = Math.floor(y / CELL_SIZE);
+    
+    if (col === lastCol && row === lastRow) return;
+    lastCol = col;
+    lastRow = row;
+    
+    const key = `${col},${row}`;
+    if (liftedBoxes[key]) {
+       clearTimeout(liftedBoxes[key].timer);
+       liftedBoxes[key].el.classList.add('lifted');
+    } else {
+       const box = document.createElement('div');
+       box.className = 'grid-lift-box';
+       box.style.left = `${col * CELL_SIZE}px`;
+       box.style.top = `${row * CELL_SIZE}px`;
+       liftContainer.appendChild(box);
+       
+       // Force reflow to trigger animation
+       box.offsetHeight; 
+       box.classList.add('lifted');
+       
+       liftedBoxes[key] = { el: box };
+    }
+    
+    liftedBoxes[key].timer = setTimeout(() => {
+       if (liftedBoxes[key]) {
+         liftedBoxes[key].el.classList.remove('lifted');
+         setTimeout(() => {
+           if (liftedBoxes[key] && !liftedBoxes[key].el.classList.contains('lifted')) {
+              liftedBoxes[key].el.remove();
+              delete liftedBoxes[key];
+           }
+         }, 300);
+       }
+    }, 400);
+  });
 
   // Clone ghosts to have more on screen (16 ghosts total)
   const ghosts = Array.from(baseGhosts);
