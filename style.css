@@ -64,22 +64,7 @@
     mask-image: linear-gradient(180deg, black 0%, black 60%, transparent 96%);
   }
 
-  /* ---------- vertical logo strip (arcade cabinet side panel) ---------- */
-  .side-logo{
-    position:absolute;
-    left:22px; top:50%;
-    transform:translateY(-50%);
-    height:58%;
-    max-height:560px;
-    opacity:.3;
-    filter:drop-shadow(0 0 14px rgba(255,212,0,.25));
-    z-index:0;
-    pointer-events:none;
-    display:none;
-  }
-  @media (min-width:1240px){
-    .side-logo{display:block;}
-  }
+
   .hero-top-tags{
     font-family:'Press Start 2P', monospace;
     font-size:8px;
