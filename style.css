@@ -168,7 +168,6 @@
   }
 
   .hero-badges{
-    margin-top: 36px;
     display:flex; gap:10px; align-items:center; justify-content:center;
     margin-bottom:26px; flex-wrap:wrap;
   }
