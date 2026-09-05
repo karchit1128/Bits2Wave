@@ -1,5 +1,5 @@
 export const problemStatements = [
-  // --- SOFTWARE TRACKS ---
+  // --- SOFTWARE TRACKS (26) ---
   {
     id: "PS1",
     title: "Real-Time Network Intrusion Dashboard",
@@ -64,7 +64,7 @@ export const problemStatements = [
     fullDetails: "Distributed telescopes rely on extremely accurate timestamps for events like stellar occultations; clock drift, camera delay, or GNSS interference/spoofing can silently corrupt otherwise valid observations. This project requires building a network of observing nodes that compares GNSS time, local clock time, camera-trigger timestamps, and RF time exchange between nodes, identifies a drifting or spoofed node, and assigns every observation a timing-confidence score."
   },
   {
-    id: "PS7-SW",
+    id: "PS7",
     title: "AEGIS-LINK: AI-Enabled Adaptive Anti-Jamming Software",
     track: "software",
     category: "AI/ML & Signal Processing",
@@ -217,7 +217,7 @@ export const problemStatements = [
     fullDetails: "Wireless channels distort signals in ways that change over time (multipath, fading), so a fixed equalizer isn't enough. This project requires simulating a time-varying channel and implementing an adaptive algorithm (e.g., LMS/RLS-based) that continuously adjusts equalizer coefficients to compensate for channel distortion."
   },
 
-  // --- HARDWARE TRACKS ---
+  // --- HARDWARE TRACKS (PURE HARDWARE + HYBRID HARDWARE) ---
   {
     id: "PS1-HW",
     title: "Autonomous Motorized Antenna Beam-Tracker",
@@ -273,87 +273,166 @@ export const problemStatements = [
     fullDetails: "Natural disasters frequently disable centralized communication systems, isolating distributed IoT sensors. This project proposes a resilient mesh-based IoT communication framework that autonomously maintains connectivity, performs self-healing routing around failed nodes, secures data using encryption, and tags GPS coordinates across ESP32/LoRa nodes.",
     hardwareReq: "ESP32 / LoRa modules, GPS module, Raspberry Pi edge gateway, power backup."
   },
-
-  // --- HYBRID TRACKS (HARDWARE + AI/SOFTWARE) ---
   {
-    id: "PS8-HYB",
+    id: "PS8-HW",
     title: "Adaptive Communication System for Disaster-Resilient Networks",
-    track: "hybrid",
-    category: "Emergency Mesh & AI",
+    track: "hardware",
+    category: "Emergency Mesh & Hardware Nodes",
     difficulty: "MEDIUM",
     overview: "Portable, self-configuring communication node that maintains link without cellular or internet infrastructure.",
     fullDetails: "During natural disasters like earthquakes or floods, conventional towers fail. Develop a self-configuring, battery-backed communication node using embedded RF transceivers and intelligent routing logic to maintain mesh communication between rescue workers."
   },
   {
-    id: "PS9-HYB",
+    id: "PS9-HW",
     title: "TerraTrack — Real-Time Road Anomaly & Pothole Detection",
-    track: "hybrid",
-    category: "Embedded IoT & Mobile AI",
+    track: "hardware",
+    category: "Embedded Hardware & Accelerometers",
     difficulty: "MEDIUM",
     overview: "Crowdsourced accelerometer + GPS module on two-wheelers that detects potholes and triggers SOS alerts.",
     fullDetails: "Current municipal infrastructure lacks continuous road monitoring. Build an IoT device (accelerometer + GPS + LTE/ESP32) mounted on vehicles that uses on-edge signal classification to detect potholes, map road anomalies, and automatically dispatch SOS alerts upon impact."
   },
   {
-    id: "PS10-HYB",
+    id: "PS10-HW",
     title: "Intelligent Reconfigurable Wireless Device",
-    track: "hybrid",
-    category: "Smart RF & Adaptive Control",
+    track: "hardware",
+    category: "Smart RF & Hardware Control",
     difficulty: "MEDIUM",
     overview: "A smart wireless device that detects environmental interference and automatically adjusts power, channel, and modulation.",
     fullDetails: "Wireless devices experience fading and interference when surroundings change. Propose a smart wireless hardware node that continuously senses channel conditions and uses embedded decision logic to dynamically adjust modulation schemes, frequency channels, and transmit power."
   },
   {
-    id: "PS11-HYB",
+    id: "PS11-HW",
     title: "ShieldLink: Autonomous Tactical Communication Relay Network",
-    track: "hybrid",
-    category: "Defense Tech & Autonomous Mesh",
+    track: "hardware",
+    category: "Defense Tech & Hardware Relays",
     difficulty: "HARD",
     overview: "Tactical communication relay system that extends battlefield coverage in communication-denied defense scenarios.",
     fullDetails: "Modern defense operations require uninterrupted connectivity across harsh terrain. Develop autonomous mobile/drone relay nodes that evaluate signal strength and dynamically reposition themselves to preserve high-bandwidth encrypted data links between squads and command centers."
   },
   {
-    id: "PS12-HYB",
+    id: "PS12-HW",
     title: "Adaptive Emergency Drone Landing Beacon",
-    track: "hybrid",
-    category: "UAV & Smart Infrastructure",
+    track: "hardware",
+    category: "UAV & Hardware Beacons",
     difficulty: "HARD",
     overview: "Smart landing beacon that communicates with distressed drones and enables safe emergency landings.",
     fullDetails: "Drone failures in smart cities pose severe safety risks. Design an external smart landing beacon equipped with wireless transceivers and sensors that communicates with drones suffering from low battery or GPS denial, selecting a safe landing pad and guiding the drone down autonomously."
   },
   {
-    id: "PS13-HYB",
+    id: "PS13-HW",
     title: "FORESTGUARD AI: Low-Power Acoustic Wildlife Intrusion Detection",
-    track: "hybrid",
-    category: "Edge AI & Environmental IoT",
+    track: "hardware",
+    category: "Edge Hardware & Acoustic Sensors",
     difficulty: "HARD",
     overview: "Low-power acoustic sensor node that classifies wildlife sounds via deep learning and sends cellular alerts.",
     fullDetails: "Forest-edge communities face severe human-wildlife conflicts. Develop an ultra-low-power acoustic sensing node (microphones + ESP32/Raspberry Pi + Solar) that runs on-device deep learning sound classification to distinguish animal threats from ambient noise and dispatch immediate 4G alerts."
   },
   {
-    id: "PS14-HYB",
+    id: "PS14-HW",
     title: "COVERAGE-AI: Wireless Signal Analytics & Optimization System",
-    track: "hybrid",
-    category: "Mobile Robotics & Signal Heatmaps",
+    track: "hardware",
+    category: "Robotics & Hardware Sensors",
     difficulty: "MEDIUM",
     overview: "Mobile-node (drone/AGV) signal mapping system that logs RSSI, builds heatmaps, and recommends tower sites.",
     fullDetails: "Deploy a mobile robot or drone equipped with RSSI measurement hardware to survey an area, send RF logs to a central system, generate a 3D signal strength heatmap, and run AI prediction models to suggest optimal repeater positions."
   },
   {
-    id: "PS15-HYB",
+    id: "PS15-HW",
     title: "SECURE-SHIELD AI: Secure Communication Monitoring & Anomaly Detection",
-    track: "hybrid",
-    category: "Cybersecurity & RF Monitoring",
+    track: "hardware",
+    category: "RF Hardware & Cybersecurity",
     difficulty: "MEDIUM",
     overview: "AI-enabled wireless monitoring grid that detects rogue nodes, transmission spikes, and unauthorized traffic.",
     fullDetails: "Build a network of ESP32/LoRa monitor nodes that continuously inspect RF traffic patterns, pass data to an ML engine, and flag rogue nodes or message flooding attacks in real time."
   },
   {
-    id: "PS16-HYB",
+    id: "PS16-HW",
     title: "DELAYSMART: Store-and-Forward Resilient Network System",
-    track: "hybrid",
-    category: "Delay-Tolerant Networks (DTN)",
+    track: "hardware",
+    category: "Delay-Tolerant Hardware & Storage",
     difficulty: "MEDIUM",
     overview: "AI delay-tolerant networking system that stores packets during outages and predicts optimal transmission windows.",
     fullDetails: "In remote or space communications, links drop frequently. Build a hardware node with local SD storage that buffers messages during outages, uses AI models to predict when connectivity will restore, and bursts packets safely without data loss."
+  },
+  {
+    id: "PS17-HW",
+    title: "Communication-Aware Motion Safety",
+    track: "hardware",
+    category: "Robotics & RF Safety Control",
+    difficulty: "HARD",
+    overview: "Predicts whether planned vehicle movement will break minimum communication link requirements before executing.",
+    fullDetails: "Remote-controlled heavy machinery loses video links when entering RF shadows. Build a remote vehicle system (ESP32/MCU) that combines location, direction, planned path, antenna measurements, and network indicators to predict failure risk and trigger preventive rerouting or safe stopping."
+  },
+  {
+    id: "PS18-HW",
+    title: "Ground-Based GPS Backup",
+    track: "hardware",
+    category: "RF Positioning & Trilateration",
+    difficulty: "MEDIUM",
+    overview: "Build a ground-based positioning system that locates a device using nearby wireless stations via trilateration.",
+    fullDetails: "GPS becomes weak indoors or in urban canyons. Set up 3+ fixed wireless stations at known locations and a movable receiver node (ESP32) that estimates distances and calculates position through real-time trilateration."
+  },
+  {
+    id: "PS19-HW",
+    title: "Self-Updating Radio Map for Hazardous Zones",
+    track: "hardware",
+    category: "Mobile Rovers & RF Mapping",
+    difficulty: "HARD",
+    overview: "Rover system that records RSSI/latency/throughput to continuously map site radio coverage and detect dead zones.",
+    fullDetails: "Radio coverage in active mines shifts continuously. Mount a rover or mobile node to record position along with RSSI, packet loss, and latency to build a live coverage map and detect new dead zones."
+  },
+  {
+    id: "PS20-HW",
+    title: "Dual-Path Wireless Internet Continuity",
+    track: "hardware",
+    category: "Multi-Link Wireless Systems",
+    difficulty: "MEDIUM",
+    overview: "Uses two independent wireless radio paths to maintain internet stability when one link degrades.",
+    fullDetails: "Rural fixed-wireless broadband suffers when a single tower link is blocked. Set up two ESP32/Wi-Fi links to a home receiver node, continuously monitoring quality and seamlessly switching to the better link or combining both for maximum uptime."
+  },
+  {
+    id: "PS21-HW",
+    title: "Multi-Hop LoRa Mesh with Dynamic Congestion Avoidance for Underground Mining",
+    track: "hardware",
+    category: "Sub-GHz LoRa Mesh & Mining",
+    difficulty: "HARD",
+    overview: "Decentralized mesh routing protocol over LoRa transceivers for underground mining tunnels without GPS timing.",
+    fullDetails: "Sub-surface mining tunnels suffer from extreme signal attenuation and multipath reflections. Design an asynchronous LoRa mesh routing protocol that dynamically optimizes paths based on RSSI gradients and packet error rates without centralized coordination."
+  },
+  {
+    id: "PS22-HW",
+    title: "Non-Intrusive Pipeline Corrosion Monitor Using Guided Ultrasonic Waves",
+    track: "hardware",
+    category: "Ultrasonic Waves & EMAT Sensing",
+    difficulty: "HARD",
+    overview: "Low-power EMAT sensor node that excites guided Lamb waves along pipe walls to detect corrosion.",
+    fullDetails: "Buried pipelines suffer from wall-thinning. Build an IoT node driving Electromagnetic Acoustic Transducers (EMAT) to send ultrasonic Lamb waves along pipe walls and analyze dispersion curves locally to flag corrosion without opening the pipe."
+  },
+  {
+    id: "PS23-HW",
+    title: "Autonomous Water Reservoir Sludge Profiler with Depth-Integrated LPWAN",
+    track: "hardware",
+    category: "Underwater Sonar & LPWAN Robotics",
+    difficulty: "HARD",
+    overview: "Floating, buoyancy-controlled robotic acoustic sensor node that maps sludge depth using sonar and transmits over LoRaWAN.",
+    fullDetails: "Sediment in water reservoirs reduces storage. Build a floating, buoyancy-controlled robotic sonar node that periodically submerges, measures sludge depth profiles, resurfaces, and transmits bathymetric data over LoRaWAN."
+  },
+  {
+    id: "PS24-HW",
+    title: "Multi-Gas Leak Triangulation System for Industrial Plants (GASTRACE)",
+    track: "hardware",
+    category: "Gas Sensor Grid & Localization",
+    difficulty: "HARD",
+    overview: "Distributed grid of 4-6 gas sensor nodes that localizes leak sources using concentration patterns and triangulation.",
+    fullDetails: "Most gas detectors only alert that a leak happened, not where. Deploy 4-6 gas sensor nodes (ESP32/STM32) sending time-synced gas readings over Wi-Fi/LoRa to run weighted-centroid or gradient-ascent localization algorithms."
+  },
+  {
+    id: "PS25-HW",
+    title: "Noise-Pollution Mapping Network with Source Direction-Finding (SONOMAP)",
+    track: "hardware",
+    category: "Acoustic Arrays & Beamforming",
+    difficulty: "HARD",
+    overview: "Network of microphone-array nodes that logs dB levels and estimates direction-of-arrival (DOA) to noise sources.",
+    fullDetails: "Deploy 4-6 nodes with 3-4 mic arrays on ESP32/Raspberry Pi to perform Direction-of-Arrival (DOA) beamforming and TDOA cross-correlation, displaying live noise heatmaps and source direction arrows on a map."
   }
 ];

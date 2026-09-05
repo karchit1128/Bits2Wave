@@ -13,7 +13,6 @@ export function initTracksComponent() {
         <button class="ps-tab-btn active" data-filter="all">ALL TRACKS (${problemStatements.length})</button>
         <button class="ps-tab-btn" data-filter="software">SOFTWARE (${problemStatements.filter(p=>p.track==='software').length})</button>
         <button class="ps-tab-btn" data-filter="hardware">HARDWARE (${problemStatements.filter(p=>p.track==='hardware').length})</button>
-        <button class="ps-tab-btn" data-filter="hybrid">HYBRID (${problemStatements.filter(p=>p.track==='hybrid').length})</button>
       </div>
       <div class="ps-search-box" style="position: relative; flex: 1; max-width: 320px;">
         <input type="text" id="psSearchInput" placeholder="🔍 SEARCH PROBLEM STATEMENTS..." style="width: 100%; padding: 10px 14px; background: var(--panel); border: 2px solid var(--maze); color: var(--yellow); font-family: 'Space Mono', monospace; font-size: 12px; outline: none;">
@@ -25,19 +24,19 @@ export function initTracksComponent() {
     </div>
 
     <!-- RETRO PS DETAIL MODAL -->
-    <div class="ps-modal-overlay" id="psModalOverlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(4px); z-index: 9999; align-items: center; justify-content: center; padding: 20px;">
-      <div class="ps-modal-content" style="background: var(--panel); border: 4px solid var(--yellow); max-width: 650px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 25px; position: relative; box-shadow: 0 0 30px var(--yellow);">
-        <button class="ps-modal-close" id="psModalClose" style="position: absolute; top: 15px; right: 15px; background: var(--pink); border: none; color: white; width: 32px; height: 32px; font-family: 'Press Start 2P', monospace; cursor: pointer;">✕</button>
-        <div class="ps-modal-header" style="margin-bottom: 20px;">
+    <div class="ps-modal-overlay" id="psModalOverlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(4px); z-index: 99999; align-items: center; justify-content: center; padding: 20px;">
+      <div class="ps-modal-content" style="background: var(--panel); border: 4px solid var(--yellow); max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 25px; position: relative; box-shadow: 0 0 35px var(--yellow);">
+        <button class="ps-modal-close" id="psModalClose" style="position: absolute; top: 15px; right: 15px; background: var(--pink); border: none; color: white; width: 34px; height: 34px; font-family: 'Press Start 2P', monospace; cursor: pointer; font-size: 14px;">✕</button>
+        <div class="ps-modal-header" style="margin-bottom: 20px; padding-right: 40px;">
           <span class="ps-modal-badge" id="modalBadge" style="display: inline-block; font-family: 'Press Start 2P', monospace; font-size: 10px; padding: 4px 8px; background: rgba(255,212,0,0.2); color: var(--yellow); border: 1px solid var(--yellow); margin-bottom: 10px;">PS ID</span>
-          <h2 id="modalTitle" style="font-family: 'Press Start 2P', monospace; font-size: 16px; color: var(--white); margin: 0; line-height: 1.5;">Title</h2>
+          <h2 id="modalTitle" style="font-family: 'Press Start 2P', monospace; font-size: 15px; color: var(--white); margin: 0; line-height: 1.6;">Title</h2>
         </div>
         <div class="ps-modal-body" style="font-family: 'Space Mono', monospace; font-size: 13px; color: var(--dim); line-height: 1.6;">
-          <div style="margin-bottom: 15px;"><strong style="color: var(--cyan);">CATEGORY:</strong> <span id="modalCategory"></span></div>
-          <div style="margin-bottom: 15px;"><strong style="color: var(--pink);">DIFFICULTY:</strong> <span id="modalDifficulty"></span></div>
-          <div style="margin-bottom: 15px;"><strong style="color: var(--yellow);">OVERVIEW:</strong> <p id="modalOverview" style="margin-top: 5px; color: var(--white);"></p></div>
-          <div style="margin-bottom: 15px;"><strong style="color: var(--cyan);">FULL DETAILS:</strong> <p id="modalFullDetails" style="margin-top: 5px;"></p></div>
-          <div id="modalHardwareBox" style="display: none; background: rgba(0,255,255,0.08); border-left: 3px solid var(--cyan); padding: 10px; margin-top: 15px;">
+          <div style="margin-bottom: 12px;"><strong style="color: var(--cyan);">CATEGORY:</strong> <span id="modalCategory" style="color: var(--white);"></span></div>
+          <div style="margin-bottom: 12px;"><strong style="color: var(--pink);">DIFFICULTY:</strong> <span id="modalDifficulty" style="color: var(--white);"></span></div>
+          <div style="margin-bottom: 15px;"><strong style="color: var(--yellow);">OVERVIEW:</strong> <p id="modalOverview" style="margin-top: 5px; color: var(--white); font-size: 13px;"></p></div>
+          <div style="margin-bottom: 15px;"><strong style="color: var(--cyan);">FULL DETAILS:</strong> <p id="modalFullDetails" style="margin-top: 5px; color: #d0d0d0; line-height: 1.7;"></p></div>
+          <div id="modalHardwareBox" style="display: none; background: rgba(0,255,255,0.08); border-left: 3px solid var(--cyan); padding: 12px; margin-top: 15px;">
             <strong style="color: var(--cyan);">HARDWARE REQUIRED:</strong>
             <p id="modalHardware" style="margin: 5px 0 0; color: var(--white);"></p>
           </div>
@@ -82,7 +81,7 @@ export function initTracksComponent() {
 
     psGrid.innerHTML = filtered.map(ps => {
       const diffColor = ps.difficulty === 'HARD' ? 'var(--pink)' : (ps.difficulty === 'MEDIUM' ? 'var(--yellow)' : 'var(--cyan)');
-      const trackGlow = ps.track === 'hardware' ? 'rgba(53,230,255,.3)' : (ps.track === 'hybrid' ? 'rgba(255,179,71,.3)' : 'rgba(255,77,141,.3)');
+      const trackGlow = ps.track === 'hardware' ? 'rgba(53,230,255,.3)' : 'rgba(255,77,141,.3)';
 
       return `
         <div class="ps-card" data-id="${ps.id}" style="background: var(--panel); border: 2px solid var(--maze); padding: 18px; cursor: pointer; transition: all 0.2s ease; position: relative;" onmouseover="this.style.borderColor='var(--yellow)'; this.style.boxShadow='0 0 15px ${trackGlow}'" onmouseout="this.style.borderColor='var(--maze)'; this.style.boxShadow='none'">
@@ -100,7 +99,9 @@ export function initTracksComponent() {
 
     // Attach click listeners to cards
     document.querySelectorAll('.ps-card').forEach(card => {
-      card.addEventListener('click', () => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const id = card.getAttribute('data-id');
         const ps = problemStatements.find(p => p.id === id);
         if (ps) openModal(ps);
@@ -109,6 +110,7 @@ export function initTracksComponent() {
   }
 
   function openModal(ps) {
+    if (!modalOverlay) return;
     document.getElementById('modalBadge').textContent = `${ps.id} — ${ps.track.toUpperCase()} TRACK`;
     document.getElementById('modalTitle').textContent = ps.title;
     document.getElementById('modalCategory').textContent = ps.category;
