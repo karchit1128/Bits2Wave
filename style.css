@@ -229,6 +229,123 @@
     box-shadow:0 0 0 var(--pink);
   }
 
+  nav.links a.active-nav {
+    color: var(--yellow) !important;
+    text-shadow: 0 0 10px rgba(255,212,0,0.8);
+  }
+  nav.links a.active-nav::before, nav.links a.active-nav::after {
+    opacity: 1 !important;
+    color: var(--yellow) !important;
+  }
+
+  /* ================= BIFURCATED PAGE SECTIONS ================= */
+  .page-section {
+    display: none;
+    min-height: 85vh;
+  }
+  .page-section.active-page {
+    display: block;
+    animation: pageFadeIn 0.35s ease-out forwards;
+  }
+  @keyframes pageFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Stage Select Hub Grid on Home Page */
+  .stage-hub {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px dashed var(--maze);
+  }
+  .stage-hub-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    color: var(--cyan);
+    margin-bottom: 24px;
+    letter-spacing: 2px;
+  }
+  .stage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .stage-card {
+    background: var(--panel);
+    border: 2px solid var(--maze);
+    padding: 18px 14px;
+    text-decoration: none;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .stage-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--yellow);
+    box-shadow: 0 8px 20px rgba(255, 212, 0, 0.25);
+    color: var(--yellow);
+  }
+  .stage-icon {
+    font-size: 24px;
+  }
+  .stage-name {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    line-height: 1.4;
+  }
+  .stage-desc {
+    font-size: 11px;
+    color: var(--dim);
+    margin: 0;
+  }
+
+  /* Section Page Bar (Top / Bottom Navigation on Pages) */
+  .page-nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 50px;
+    padding-top: 24px;
+    border-top: 1px dashed var(--maze);
+  }
+  .page-nav-bar .page-nav-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    padding: 12px 18px;
+    background: var(--panel);
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .page-nav-bar .page-nav-btn:hover {
+    background: var(--cyan);
+    color: var(--bg);
+    box-shadow: 0 0 12px var(--cyan);
+  }
+  .page-nav-bar .page-nav-btn.home-btn {
+    color: var(--yellow);
+    border-color: var(--yellow);
+  }
+  .page-nav-bar .page-nav-btn.home-btn:hover {
+    background: var(--yellow);
+    color: var(--bg);
+    box-shadow: 0 0 12px var(--yellow);
+  }
+
   .burger{display:none; background:none; border:2px solid var(--yellow); color:var(--yellow); font-size:18px; padding:6px 10px; cursor:pointer;}
 
   /* ================= HERO ================= */
@@ -523,6 +640,28 @@
   }
   .ghost-card p{font-size:13px; color:var(--dim); margin:0;}
   .ghost-card .track-tag{font-size:9px; letter-spacing:2px; color:var(--dim); margin-bottom:10px; display:block; font-family:'Press Start 2P',monospace;}
+
+  /* PS Filter Tabs */
+  .ps-tab-btn {
+    background: var(--panel);
+    border: 2px solid var(--maze);
+    color: var(--dim);
+    padding: 8px 14px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .ps-tab-btn:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+  .ps-tab-btn.active {
+    background: var(--cyan);
+    border-color: var(--cyan);
+    color: #0d1440;
+    box-shadow: 0 0 10px rgba(53,230,255,0.5);
+  }
 
   /* ================= LEVELS / TIMELINE ================= */
   .levels{position:relative; max-width:760px; margin:0 auto;}
