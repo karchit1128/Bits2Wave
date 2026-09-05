@@ -111,9 +111,10 @@ export function initTracksComponent() {
 
   function openModal(ps) {
     if (!modalOverlay) return;
-    document.getElementById('modalBadge').textContent = `${ps.id} — ${ps.track.toUpperCase()} TRACK`;
-    document.getElementById('modalTitle').textContent = ps.title;
-    document.getElementById('modalCategory').textContent = ps.category;
+    const trackLabel = ps.isHybrid ? 'HARDWARE TRACK (HYBRID)' : `${ps.track.toUpperCase()} TRACK`;
+    document.getElementById('modalBadge').textContent = `${ps.id} — ${trackLabel}`;
+    document.getElementById('modalTitle').textContent = ps.isHybrid ? `${ps.title} [HYBRID]` : ps.title;
+    document.getElementById('modalCategory').textContent = ps.isHybrid ? `${ps.category} (HYBRID)` : ps.category;
     document.getElementById('modalDifficulty').textContent = ps.difficulty;
     document.getElementById('modalOverview').textContent = ps.overview;
     document.getElementById('modalFullDetails').textContent = ps.fullDetails;
