@@ -363,3 +363,48 @@ document.querySelectorAll('section, .rule-card, .ghost-card, .level').forEach(el
 
   requestAnimationFrame(update);
 })();
+
+// ---- SPA Section Page Router ----
+function initSectionRouter() {
+  function handleRoute() {
+    let hash = window.location.hash;
+    if (!hash || hash === '#' || hash === '#top') {
+      hash = '#top';
+    }
+
+    const targetSection = document.querySelector(hash);
+    const allSections = document.querySelectorAll('.page-section');
+
+    if (targetSection && targetSection.classList.contains('page-section')) {
+      allSections.forEach(sec => sec.classList.remove('active-page'));
+      targetSection.classList.add('active-page');
+
+      // Make all fade-in elements within the active section visible immediately
+      targetSection.querySelectorAll('.fade-in-element').forEach(el => {
+        el.classList.add('visible');
+      });
+
+      // Update active nav highlights
+      document.querySelectorAll('#navLinks a').forEach(a => {
+        if (a.getAttribute('href') === hash) {
+          a.classList.add('active-nav');
+        } else {
+          a.classList.remove('active-nav');
+        }
+      });
+
+      // Scroll to top of active page view smoothly
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  window.addEventListener('hashchange', handleRoute);
+  handleRoute();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSectionRouter);
+} else {
+  initSectionRouter();
+}
+
