@@ -402,9 +402,15 @@ function initSectionRouter() {
   handleRoute();
 }
 
+import { initTracksComponent } from './js/tracks.js';
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initSectionRouter);
+  document.addEventListener('DOMContentLoaded', () => {
+    initSectionRouter();
+    initTracksComponent();
+  });
 } else {
   initSectionRouter();
+  initTracksComponent();
 }
 
