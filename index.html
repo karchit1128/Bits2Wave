@@ -28,7 +28,7 @@
 </header>
 
 <!-- ================= HERO ================= -->
-<section class="hero" id="top">
+<section class="hero page-section active-page" id="top">
   <div class="maze-art" aria-hidden="true"></div>
   
   <div class="wrap">
@@ -68,6 +68,40 @@
       <a href="#about" class="btn btn-ghost"><span class="btn-icon">📜</span> <span class="btn-text">READ THE RULES</span> <span class="btn-arr">&gt;</span></a>
     </div>
 
+    <div class="stage-hub">
+      <h3 class="stage-hub-title">◆ SELECT STAGE ◆</h3>
+      <div class="stage-grid">
+        <a href="#about" class="stage-card">
+          <div class="stage-num">STAGE 01</div>
+          <div class="stage-name">HOW TO PLAY</div>
+        </a>
+        <a href="#tracks" class="stage-card">
+          <div class="stage-num">STAGE 02</div>
+          <div class="stage-name">TRACKS</div>
+        </a>
+        <a href="#levels" class="stage-card">
+          <div class="stage-num">STAGE 03</div>
+          <div class="stage-name">LEVELS</div>
+        </a>
+        <a href="#prizes" class="stage-card">
+          <div class="stage-num">STAGE 04</div>
+          <div class="stage-name">HIGH SCORES</div>
+        </a>
+        <a href="#collaborators" class="stage-card">
+          <div class="stage-num">STAGE 05</div>
+          <div class="stage-name">ALLIES</div>
+        </a>
+        <a href="#faq" class="stage-card">
+          <div class="stage-num">STAGE 06</div>
+          <div class="stage-name">FAQ</div>
+        </a>
+        <a href="#register" class="stage-card stage-card-cta">
+          <div class="stage-num">FINAL STAGE</div>
+          <div class="stage-name">REGISTER</div>
+        </a>
+      </div>
+    </div>
+
     <a href="#about" class="scroll-hint">▼ PRESS TO CONTINUE ▼</a>
   </div>
 </section>
@@ -97,7 +131,7 @@
 
 
 <!-- ================= ABOUT / RULES ================= -->
-<section class="pad" id="about">
+<section class="pad page-section" id="about">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">◆ GAME RULES ◆</span>
@@ -126,11 +160,15 @@
         <p>Submit your build, demo it live, and defend it in a 5-minute pitch to the judges.</p>
       </div>
     </div>
+    <div class="page-nav-bar">
+      <a href="#top" class="page-nav-btn">&laquo; MAIN MENU</a>
+      <a href="#tracks" class="page-nav-btn">NEXT: TRACKS &raquo;</a>
+    </div>
   </div>
 </section>
 
 <!-- ================= TRACKS ================= -->
-<section class="pad alt" id="tracks">
+<section class="pad alt page-section" id="tracks">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">◆ SELECT YOUR TRACK ◆</span>
@@ -176,11 +214,15 @@
       </div>
 
     </div>
+    <div class="page-nav-bar">
+      <a href="#about" class="page-nav-btn">&laquo; PREV: HOW TO PLAY</a>
+      <a href="#levels" class="page-nav-btn">NEXT: LEVELS &raquo;</a>
+    </div>
   </div>
 </section>
 
 <!-- ================= LEVELS / TIMELINE ================= -->
-<section class="pad" id="levels">
+<section class="pad page-section" id="levels">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">◆ LEVEL SELECT ◆</span>
@@ -192,57 +234,61 @@
       <div class="level">
         <div class="node">L1</div>
         <div class="content">
-          <span class="when">[REGISTRATION OPEN DATE]</span>
+          <span class="when">SEP 12, 2026</span>
           <h3>REGISTRATIONS OPEN</h3>
-          <p>The coin slot opens. Lock in your team and pick your track.</p>
+          <p>The coin slot opens on September 12th. Lock in your team and pick your track.</p>
         </div>
       </div>
       <div class="level">
         <div class="node">L2</div>
         <div class="content">
-          <span class="when">[IDEA SUBMISSION DATE]</span>
-          <h3>IDEA SUBMISSION</h3>
-          <p>Submit a short abstract of what your team plans to build.</p>
+          <span class="when">SEP 26, 2026</span>
+          <h3>REGISTRATIONS CLOSE</h3>
+          <p>Final call on September 26th! Complete your team registration and submit your initial abstract.</p>
         </div>
       </div>
       <div class="level">
         <div class="node">L3</div>
         <div class="content">
-          <span class="when">[HACKATHON START DATE]</span>
-          <h3>CHOMP TIME BEGINS</h3>
-          <p>Check-in, opening ceremony, and the 24-hour clock starts.</p>
+          <span class="when">OCT 03, 2026</span>
+          <h3>TOP 40 TEAMS ANNOUNCED</h3>
+          <p>Shortlisted teams revealed on October 3rd. Top 40 squads advance to the offline battlefield.</p>
         </div>
       </div>
       <div class="level">
         <div class="node">L4</div>
         <div class="content">
-          <span class="when">[CHECKPOINT DATE/TIME]</span>
-          <h3>MENTOR CHECKPOINT</h3>
-          <p>Mentors roam the maze — get feedback before you're too deep in.</p>
+          <span class="when">OCT 10, 2026</span>
+          <h3>GRAND FINALE: DAY 1</h3>
+          <p>Check-in, opening ceremony, and 24-hour hackathon kick-off. Mentors roam the maze for checkpoints.</p>
         </div>
       </div>
       <div class="level boss">
         <div class="node">L5</div>
         <div class="content">
-          <span class="when">[SUBMISSION DEADLINE]</span>
+          <span class="when">OCT 11, 2026</span>
           <h3>BOSS LEVEL: FINAL SUBMISSION</h3>
-          <p>Code freeze. Submit your repo, demo video, and pitch deck.</p>
+          <p>Code freeze! Submit your repository, prototype demo, and presentation pitch deck.</p>
         </div>
       </div>
       <div class="level">
         <div class="node">L6</div>
         <div class="content">
-          <span class="when">[RESULTS DATE]</span>
+          <span class="when">OCT 11, 2026</span>
           <h3>WINNERS ANNOUNCED</h3>
-          <p>Live judging, closing ceremony, and the high-score board is locked in.</p>
+          <p>Grand Finale evaluation, live demo judging, closing ceremony, and high-score podium awards!</p>
         </div>
       </div>
+    </div>
+    <div class="page-nav-bar">
+      <a href="#tracks" class="page-nav-btn">&laquo; PREV: TRACKS</a>
+      <a href="#prizes" class="page-nav-btn">NEXT: HIGH SCORES &raquo;</a>
     </div>
   </div>
 </section>
 
 <!-- ================= PRIZES ================= -->
-<section class="pad alt" id="prizes">
+<section class="pad alt page-section" id="prizes">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">◆ FINAL SCORE ◆</span>
@@ -302,11 +348,15 @@
       <div class="bonus-chip"><img src="data:image/png;base64,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" alt=""><span><b>Track Champion</b> — Certificate + Goodies</span></div>
       <div class="bonus-chip"><img src="data:image/png;base64,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" alt=""><span><b>All Participants</b> — E-Certificates</span></div>
     </div>
+    <div class="page-nav-bar">
+      <a href="#levels" class="page-nav-btn">&laquo; PREV: LEVELS</a>
+      <a href="#collaborators" class="page-nav-btn">NEXT: ALLIES &raquo;</a>
+    </div>
   </div>
 </section>
 
 <!-- ================= REGISTER ================= -->
-<section class="pad" id="register">
+<section class="pad page-section" id="register">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">◆ CONTINUE? ◆</span>
@@ -330,11 +380,15 @@
         <p>Your team is registered. Watch your inbox for the next level's briefing.</p>
       </div>
     </div>
+    <div class="page-nav-bar">
+      <a href="#faq" class="page-nav-btn">&laquo; PREV: FAQ</a>
+      <a href="#top" class="page-nav-btn">MAIN MENU &raquo;</a>
+    </div>
   </div>
 </section>
 
 <!-- ================= COLLABORATORS ================= -->
-<section class="pad alt" id="collaborators" style="position:relative;">
+<section class="pad alt page-section" id="collaborators" style="position:relative;">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">◆ CO-OP MODE ◆</span>
@@ -352,11 +406,15 @@
         <img class="collab-logo" src="images/ieee-aps-mtts.png" alt="IEEE APS MTTS">
       </div>
     </div>
+    <div class="page-nav-bar">
+      <a href="#prizes" class="page-nav-btn">&laquo; PREV: HIGH SCORES</a>
+      <a href="#faq" class="page-nav-btn">NEXT: FAQ &raquo;</a>
+    </div>
   </div>
 </section>
 
 <!-- ================= FAQ ================= -->
-<section class="pad alt" id="faq">
+<section class="pad alt page-section" id="faq">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">◆ PAUSE MENU ◆</span>
@@ -385,6 +443,10 @@
         <summary>What if our team has fewer than 2 members? <span class="mark">+</span></summary>
         <div class="a">Solo participants can register and will be matched with a squad during check-in, so no one plays alone.</div>
       </details>
+    </div>
+    <div class="page-nav-bar">
+      <a href="#collaborators" class="page-nav-btn">&laquo; PREV: ALLIES</a>
+      <a href="#register" class="page-nav-btn">NEXT: REGISTER &raquo;</a>
     </div>
   </div>
 </section>
