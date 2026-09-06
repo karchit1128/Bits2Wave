@@ -1205,10 +1205,10 @@
 .problem-nav-bar { display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 40px; margin-top: -20px; }
 @media(max-width: 768px) { .problem-nav-bar { flex-direction: column; gap: 20px; } .problem-nav-bar .back-btn { position: static !important; transform: none !important; } }
 
-#btn-hardware { color: var(--cyan); border-color: var(--cyan); }
-#btn-hardware:hover, #btn-hardware.active { background: var(--cyan); color: var(--bg); box-shadow: 0 0 10px var(--cyan); }
-#btn-software { color: var(--pink); border-color: var(--pink); }
-#btn-software:hover, #btn-software.active { background: var(--pink); color: var(--bg); box-shadow: 0 0 10px var(--pink); }
+#btn-hardware { color: var(--pink); border-color: var(--pink); }
+#btn-hardware:hover, #btn-hardware.active { background: var(--pink); color: var(--bg); box-shadow: 0 0 10px var(--pink); }
+#btn-software { color: var(--cyan); border-color: var(--cyan); }
+#btn-software:hover, #btn-software.active { background: var(--cyan); color: var(--bg); box-shadow: 0 0 10px var(--cyan); }
 
 /* Premium Card Hover Effects */
 .problem-card {
@@ -1220,19 +1220,19 @@
 
 .problem-card.hardware:hover {
   transform: translateY(-5px) scale(1.02);
-  border-color: var(--cyan);
-  box-shadow: 0 10px 30px rgba(53, 230, 255, 0.15), inset 0 0 15px rgba(53, 230, 255, 0.05);
-}
-.problem-card.hardware:hover .ps-id { color: var(--cyan); text-shadow: 0 0 8px var(--cyan); }
-.problem-card.hardware:hover .card-footer { color: var(--cyan); text-shadow: 0 0 5px var(--cyan); }
-
-.problem-card.software:hover {
-  transform: translateY(-5px) scale(1.02);
   border-color: var(--pink);
   box-shadow: 0 10px 30px rgba(255, 0, 128, 0.15), inset 0 0 15px rgba(255, 0, 128, 0.05);
 }
-.problem-card.software:hover .ps-id { color: var(--pink); text-shadow: 0 0 8px var(--pink); }
-.problem-card.software:hover .card-footer { color: var(--pink); text-shadow: 0 0 5px var(--pink); }
+.problem-card.hardware:hover .ps-id { color: var(--pink); text-shadow: 0 0 8px var(--pink); }
+.problem-card.hardware:hover .card-footer { color: var(--pink); text-shadow: 0 0 5px var(--pink); }
+
+.problem-card.software:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: var(--cyan);
+  box-shadow: 0 10px 30px rgba(53, 230, 255, 0.15), inset 0 0 15px rgba(53, 230, 255, 0.05);
+}
+.problem-card.software:hover .ps-id { color: var(--cyan); text-shadow: 0 0 8px var(--cyan); }
+.problem-card.software:hover .card-footer { color: var(--cyan); text-shadow: 0 0 5px var(--cyan); }
 
 /* Scanline Effect inside cards */
 .problem-card::before {
