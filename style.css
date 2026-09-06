@@ -733,6 +733,63 @@
 
 
 
+  /* ── Per-level accent colours ──────────────────────────────── */
+  /* Each level sets --lc (level colour). The shared node/content rules
+     read var(--lc) so we only change one value per level.           */
+  .level-1 { --lc: #ffd400; --lc-rgb: 255,212,0;   }   /* yellow  — start */
+  .level-2 { --lc: #35e6ff; --lc-rgb: 53,230,255;  }   /* cyan    — deadline */
+  .level-3 { --lc: #00ffa3; --lc-rgb: 0,255,163;   }   /* mint    — shortlist */
+  .level-4 { --lc: #a855f7; --lc-rgb: 168,85,247;  }   /* purple  — finale */
+  .level-5 { --lc: #ff4d8d; --lc-rgb: 255,77,141;  }   /* pink    — boss */
+  .level-6 { --lc: #fff9c4; --lc-rgb: 255,249,196; }   /* gold-white — winners */
+
+  /* Override node to use --lc */
+  .level .node {
+    border-color: var(--lc);
+    color: var(--lc);
+    box-shadow: 0 0 12px rgba(var(--lc-rgb), 0.25), inset 0 0 10px rgba(var(--lc-rgb), 0.06);
+  }
+  .level .node::after {
+    border-color: rgba(var(--lc-rgb), 0.18);
+  }
+  .level:hover .node {
+    box-shadow: 0 0 22px rgba(var(--lc-rgb), 0.55), inset 0 0 14px rgba(var(--lc-rgb), 0.12);
+  }
+
+  /* Override content card left border & accent bar to use --lc */
+  .level .content {
+    border-left-color: var(--lc);
+  }
+  .level .content::after {
+    background: linear-gradient(90deg, var(--lc), transparent);
+  }
+  .level .content .when {
+    color: var(--lc);
+  }
+  .level:hover .content {
+    border-left-color: var(--lc);
+    box-shadow: 0 4px 24px rgba(var(--lc-rgb), 0.08), -2px 0 14px rgba(var(--lc-rgb), 0.18);
+  }
+
+  /* Boss (L5) still keeps its pulse animation */
+  .level.boss .node {
+    animation: boss-pulse-lc 1.8s ease-in-out infinite;
+  }
+  @keyframes boss-pulse-lc {
+    0%, 100% { box-shadow: 0 0 16px rgba(255,77,141,0.45), inset 0 0 8px rgba(255,77,141,0.12); }
+    50%       { box-shadow: 0 0 34px rgba(255,77,141,0.85), inset 0 0 22px rgba(255,77,141,0.22); }
+  }
+  .level.boss .content {
+    border-color: rgba(255,77,141,0.3);
+  }
+  .level.boss .content h3 {
+    color: var(--pink);
+    text-shadow: 0 0 10px rgba(255,77,141,0.4);
+  }
+  .level.boss:hover .content {
+    box-shadow: 0 4px 24px rgba(255,77,141,0.14), -2px 0 18px rgba(255,77,141,0.25);
+  }
+
   /* ================= PRIZES / HIGH SCORES ================= */
   .prize-cabinet-grid {
     display: flex;
