@@ -36,25 +36,33 @@ function updateCountdown(){
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ---- scroll animations (Intersection Observer) ----
-const observerOptions = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.1
-};
-
-const observer = new IntersectionObserver((entries, observer) => {
+// ---- Generic scroll-reveal (sections, cards etc.) ----
+const observer = new IntersectionObserver((entries, obs) => {
   entries.forEach(entry => {
-    if(entry.isIntersecting){
+    if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
+      obs.unobserve(entry.target);
     }
   });
-}, observerOptions);
+}, { root: null, rootMargin: '0px', threshold: 0.1 });
 
-document.querySelectorAll('section, .rule-card, .ghost-card, .level').forEach(el => {
+document.querySelectorAll('section, .rule-card, .ghost-card').forEach(el => {
   el.classList.add('fade-in-element');
   observer.observe(el);
+});
+
+// ---- Timeline: staggered scroll-reveal per level ----
+const levelObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      obs.unobserve(entry.target);
+    }
+  });
+}, { root: null, rootMargin: '-60px', threshold: 0.15 });
+
+document.querySelectorAll('.level').forEach(el => {
+  levelObserver.observe(el);
 });
 
 
