@@ -408,9 +408,7 @@
     font-size: 24px;
     font-family: "Segoe UI Emoji", "Apple Color Emoji", sans-serif;
   }
-  .btn-text {
-    /* Relying on pure flexbox for natural alignment */
-  }
+  /* .btn-text — no extra styles needed; flexbox handles alignment */
   .btn-arr {
     transition: transform .12s ease, opacity .12s ease;
   }
@@ -1571,7 +1569,7 @@
 .problem-title { font-family: 'Press Start 2P', monospace; font-size: 14px; margin-bottom: 10px; line-height: 1.4; color: var(--white); }
 .problem-card.hardware .problem-title { color: var(--pink); }
 .problem-card.software .problem-title { color: var(--cyan); }
-.problem-desc { font-size: 14px; color: var(--dim); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.problem-desc { font-size: 14px; color: var(--dim); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
 /* ================= MODAL ================= */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 1000; }
