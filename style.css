@@ -1178,3 +1178,8 @@
   box-shadow: 0 0 15px rgba(53, 230, 255, 0.6);
   text-decoration: none;
 }
+
+.track-toggle-btn:active { transform: scale(0.95); }
+.back-btn:active { transform: translateY(-50%) scale(0.95) !important; }
+
+@keyframes fadeInTab { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
