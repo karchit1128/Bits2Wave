@@ -511,7 +511,7 @@
   .rule-card p{font-size:13px; color:var(--dim); margin:0;}
 
   /* ================= TRACKS / GHOSTS ================= */
-  .ghost-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  .ghost-grid{display:grid; grid-template-columns:repeat(2, minmax(280px, 380px)); justify-content:center; gap:22px;}
   .ghost-card{
     background:var(--panel); border:2px solid var(--maze);
     padding:28px 18px; text-align:center;
@@ -1132,4 +1132,49 @@
   .pixel-slogan {
     font-size: 32px;
   }
+}
+/* ================= PROBLEM STATEMENTS ================= */
+.track-toggle-container { display: flex; justify-content: center; gap: 20px; margin-bottom: 40px; }
+.track-toggle-btn { background: transparent; color: var(--white); border: 2px solid var(--white); padding: 10px 20px; font-family: 'Press Start 2P', monospace; font-size: 14px; cursor: pointer; transition: all 0.3s; }
+.track-toggle-btn.active, .track-toggle-btn:hover { background: var(--white); color: var(--bg); box-shadow: 0 0 10px var(--white); }
+
+.problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 0 20px 60px 20px; }
+.problem-card { background: rgba(10, 10, 20, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 8px; cursor: pointer; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; }
+.problem-card:hover { transform: translateY(-5px); }
+.problem-card.hardware:hover { border-color: var(--pink); box-shadow: 0 0 15px rgba(255, 59, 59, 0.3); }
+.problem-card.software:hover { border-color: var(--cyan); box-shadow: 0 0 15px rgba(53, 230, 255, 0.3); }
+.problem-title { font-family: 'Press Start 2P', monospace; font-size: 14px; margin-bottom: 10px; line-height: 1.4; color: var(--white); }
+.problem-card.hardware .problem-title { color: var(--pink); }
+.problem-card.software .problem-title { color: var(--cyan); }
+.problem-desc { font-size: 14px; color: var(--dim); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* ================= MODAL ================= */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 1000; }
+.modal-overlay.show { opacity: 1; pointer-events: auto; }
+.modal-content { background: var(--bg); border: 2px solid var(--white); width: 90%; max-width: 600px; padding: 30px; border-radius: 8px; position: relative; box-shadow: 0 0 30px rgba(255,255,255,0.1); max-height: 80vh; overflow-y: auto; }
+.modal-close { position: absolute; top: 15px; right: 20px; background: transparent; border: none; color: var(--white); font-size: 28px; cursor: pointer; transition: color 0.3s; }
+.modal-close:hover { color: var(--pink); }
+.difficulty { font-family: 'Press Start 2P', monospace; font-size: 10px; padding: 4px 8px; background: rgba(255,255,255,0.1); border-radius: 4px; color: var(--white); }
+
+/* ================= BACK BUTTON ================= */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(10, 10, 20, 0.8);
+  color: var(--cyan);
+  border: 1px solid var(--cyan);
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 0 8px rgba(53, 230, 255, 0.2);
+  letter-spacing: 1px;
+}
+.back-btn:hover {
+  background: var(--cyan);
+  color: var(--bg);
+  box-shadow: 0 0 15px rgba(53, 230, 255, 0.6);
+  text-decoration: none;
 }
