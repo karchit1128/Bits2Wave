@@ -696,61 +696,57 @@
   /* ── Scroll-reveal: levels start hidden, slide in when visible ── */
   .level {
     opacity: 0;
-    transform: translateX(-40px);
-    /* transition driven by animation when .visible is added */
+    transform: translateX(-24px);
+    will-change: opacity, transform;
   }
   .level.visible {
-    animation: levelReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: levelReveal 0.7s ease-out forwards;
   }
   /* Stagger each level by index */
   .level-1.visible { animation-delay: 0.05s; }
-  .level-2.visible { animation-delay: 0.15s; }
-  .level-3.visible { animation-delay: 0.25s; }
-  .level-4.visible { animation-delay: 0.35s; }
-  .level-5.visible { animation-delay: 0.45s; }
-  .level-6.visible { animation-delay: 0.55s; }
+  .level-2.visible { animation-delay: 0.18s; }
+  .level-3.visible { animation-delay: 0.31s; }
+  .level-4.visible { animation-delay: 0.44s; }
+  .level-5.visible { animation-delay: 0.57s; }
+  .level-6.visible { animation-delay: 0.70s; }
 
   @keyframes levelReveal {
-    0%   { opacity: 0; transform: translateX(-40px); }
-    60%  { opacity: 1; transform: translateX(6px); }
+    0%   { opacity: 0; transform: translateX(-24px); }
     100% { opacity: 1; transform: translateX(0); }
   }
 
-  /* Node power-on flicker when it enters view */
+  /* Node: smooth fade + scale-in glow */
+  .level .node {
+    opacity: 0;
+    transform: scale(0.85);
+    will-change: opacity, transform;
+  }
   .level.visible .node {
-    animation: nodeFlicker 0.7s steps(1) forwards, nodePowerOn 0.5s 0.7s ease forwards;
+    animation: nodeReveal 0.5s cubic-bezier(0.34, 1.3, 0.64, 1) 0.25s forwards;
   }
-  @keyframes nodeFlicker {
-    0%  { opacity: 0; }
-    20% { opacity: 1; }
-    30% { opacity: 0; }
-    50% { opacity: 1; }
-    60% { opacity: 0; }
-    80% { opacity: 1; }
-    90% { opacity: 0; }
-    100%{ opacity: 1; }
-  }
-  @keyframes nodePowerOn {
-    from { box-shadow: 0 0 4px rgba(var(--lc-rgb), 0.2); }
-    to   { box-shadow: 0 0 12px rgba(var(--lc-rgb), 0.3), inset 0 0 10px rgba(var(--lc-rgb), 0.07); }
+  @keyframes nodeReveal {
+    0%   { opacity: 0; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1); }
   }
 
-  /* Content card sweeps in via clip-path after the slide */
+  /* Content card: smooth fade + slight upward drift */
   .level .content {
-    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+    transform: translateY(10px);
+    will-change: opacity, transform;
   }
   .level.visible .content {
-    animation: contentSweep 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+    animation: contentReveal 0.55s ease-out 0.3s forwards;
   }
-  @keyframes contentSweep {
-    from { clip-path: inset(0 100% 0 0); }
-    to   { clip-path: inset(0 0% 0 0); }
+  @keyframes contentReveal {
+    0%   { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 
-  /* Boss level: keep pulsing even after reveal (override) */
+  /* Boss level: smooth node reveal then perpetual pulse */
   .level.boss.visible .node {
-    animation: nodeFlicker 0.7s steps(1) forwards,
-               boss-pulse-lc 1.8s 0.7s ease-in-out infinite;
+    animation: nodeReveal 0.5s cubic-bezier(0.34, 1.3, 0.64, 1) 0.25s forwards,
+               boss-pulse-lc 1.8s 0.9s ease-in-out infinite;
   }
 
 
