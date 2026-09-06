@@ -1186,3 +1186,8 @@
 
 .problem-nav-bar { display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 40px; margin-top: -20px; }
 @media(max-width: 768px) { .problem-nav-bar { flex-direction: column; gap: 20px; } .problem-nav-bar .back-btn { position: static !important; transform: none !important; } }
+
+#btn-hardware { color: var(--cyan); border-color: var(--cyan); }
+#btn-hardware:hover, #btn-hardware.active { background: var(--cyan); color: var(--bg); box-shadow: 0 0 10px var(--cyan); }
+#btn-software { color: var(--pink); border-color: var(--pink); }
+#btn-software:hover, #btn-software.active { background: var(--pink); color: var(--bg); box-shadow: 0 0 10px var(--pink); }
