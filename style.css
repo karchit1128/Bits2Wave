@@ -543,28 +543,195 @@
   .ghost-card .track-tag{font-size:9px; letter-spacing:2px; color:var(--dim); margin-bottom:10px; display:block; font-family:'Press Start 2P',monospace;}
 
   /* ================= LEVELS / TIMELINE ================= */
-  .levels{position:relative; max-width:760px; margin:0 auto;}
-  .levels::before{
-    content:""; position:absolute; left:29px; top:8px; bottom:8px; width:2px;
-    background:repeating-linear-gradient(180deg, var(--maze) 0 6px, transparent 6px 14px);
+  .levels {
+    position: relative;
+    max-width: 820px;
+    margin: 0 auto;
+    padding-left: 16px;
   }
-  .level{
-    display:flex; gap:26px; padding-bottom:44px; position:relative;
+
+  /* Glowing vertical connector line */
+  .levels::before {
+    content: "";
+    position: absolute;
+    left: 46px;
+    top: 30px;
+    bottom: 30px;
+    width: 2px;
+    background: linear-gradient(180deg,
+      transparent 0%,
+      var(--maze) 8%,
+      var(--yellow) 30%,
+      var(--cyan) 60%,
+      var(--pink) 85%,
+      transparent 100%
+    );
+    box-shadow: 0 0 8px rgba(255, 212, 0, 0.3);
+    animation: timeline-glow 3s ease-in-out infinite alternate;
   }
-  .level:last-child{padding-bottom:0;}
-  .level .node{
-    width:60px; height:60px; flex:0 0 60px;
-    background:var(--panel); border:2px solid var(--yellow);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Press Start 2P', monospace; font-size:11px; color:var(--yellow);
-    z-index:1;
+  @keyframes timeline-glow {
+    from { box-shadow: 0 0 6px rgba(255,212,0,0.2), 0 0 14px rgba(53,230,255,0.1); }
+    to   { box-shadow: 0 0 12px rgba(255,212,0,0.5), 0 0 24px rgba(53,230,255,0.2); }
   }
-  .level.boss .node{border-color:var(--pink); color:var(--pink); box-shadow:0 0 16px rgba(255,77,141,.5);}
-  .level .content h3{
-    font-family:'Press Start 2P', monospace; font-size:12px; margin:8px 0 8px; color:var(--white);
+
+  .level {
+    display: flex;
+    gap: 28px;
+    padding-bottom: 24px;
+    position: relative;
+    align-items: flex-start;
   }
-  .level .content .when{font-size:11px; color:var(--cyan); letter-spacing:1px; margin-bottom:8px; display:block;}
-  .level .content p{margin:0; font-size:13px; color:var(--dim);}
+  .level:last-child { padding-bottom: 0; }
+
+  /* Node badge */
+  .level .node {
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+    position: relative;
+    background: rgba(10, 12, 40, 0.9);
+    border: 2px solid var(--yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11px;
+    color: var(--yellow);
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 12px rgba(255, 212, 0, 0.2), inset 0 0 10px rgba(255, 212, 0, 0.05);
+  }
+  /* Scanlines inside node */
+  .level .node::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+    pointer-events: none;
+  }
+  /* Corner decorations */
+  .level .node::after {
+    content: "";
+    position: absolute;
+    top: -4px; left: -4px; right: -4px; bottom: -4px;
+    border: 1px solid rgba(255, 212, 0, 0.15);
+    pointer-events: none;
+  }
+  .level:hover .node {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(255, 212, 0, 0.45), inset 0 0 12px rgba(255, 212, 0, 0.1);
+  }
+
+  /* Boss level special node */
+  .level.boss .node {
+    border-color: var(--pink);
+    color: var(--pink);
+    box-shadow: 0 0 20px rgba(255, 77, 141, 0.5), inset 0 0 12px rgba(255, 77, 141, 0.1);
+    animation: boss-pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes boss-pulse {
+    0%, 100% { box-shadow: 0 0 16px rgba(255,77,141,0.4), inset 0 0 8px rgba(255,77,141,0.1); }
+    50%       { box-shadow: 0 0 32px rgba(255,77,141,0.8), inset 0 0 20px rgba(255,77,141,0.2); }
+  }
+  .level.boss .node::after {
+    border-color: rgba(255, 77, 141, 0.2);
+  }
+
+  /* Content card */
+  .level .content {
+    flex: 1;
+    position: relative;
+    background: rgba(10, 12, 40, 0.8);
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--maze);
+    border-left: 3px solid var(--yellow);
+    padding: 18px 22px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    overflow: hidden;
+  }
+  /* Scanlines on content card */
+  .level .content::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.012) 0px,
+      rgba(255,255,255,0.012) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* Top glowing accent bar */
+  .level .content::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--yellow), transparent);
+    opacity: 0.5;
+  }
+  .level .content > * { position: relative; z-index: 1; }
+
+  .level:hover .content {
+    border-color: var(--maze);
+    border-left-color: var(--yellow);
+    box-shadow: 0 4px 24px rgba(255,212,0,0.08), -2px 0 12px rgba(255,212,0,0.15);
+    transform: translateX(4px);
+  }
+
+  /* Boss card gets pink accent */
+  .level.boss .content {
+    border-left-color: var(--pink);
+    border-color: rgba(255, 77, 141, 0.3);
+    box-shadow: 0 0 20px rgba(255, 77, 141, 0.08);
+  }
+  .level.boss .content::after {
+    background: linear-gradient(90deg, var(--pink), transparent);
+    opacity: 0.6;
+  }
+  .level.boss:hover .content {
+    border-left-color: var(--pink);
+    box-shadow: 0 4px 24px rgba(255,77,141,0.12), -2px 0 16px rgba(255,77,141,0.2);
+  }
+
+  .level .content .when {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    color: var(--cyan);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: block;
+    opacity: 0.85;
+  }
+  .level.boss .content .when { color: var(--pink); }
+
+  .level .content h3 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    margin: 0 0 10px;
+    color: var(--white);
+    line-height: 1.6;
+    text-shadow: 0 0 12px rgba(242, 244, 255, 0.1);
+  }
+  .level.boss .content h3 { color: var(--pink); text-shadow: 0 0 10px rgba(255,77,141,0.4); }
+
+  .level .content p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--dim);
+    line-height: 1.7;
+  }
+
+
 
   /* ================= PRIZES / HIGH SCORES ================= */
   .prize-cabinet-grid {
