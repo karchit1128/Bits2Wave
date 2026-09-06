@@ -46,10 +46,25 @@ const observer = new IntersectionObserver((entries, obs) => {
   });
 }, { root: null, rootMargin: '0px', threshold: 0.1 });
 
-document.querySelectorAll('section, .rule-card, .ghost-card').forEach(el => {
+document.querySelectorAll('section, .ghost-card').forEach(el => {
   el.classList.add('fade-in-element');
   observer.observe(el);
 });
+
+// ---- Rule cards: staggered scroll-reveal ----
+const cardObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      obs.unobserve(entry.target);
+    }
+  });
+}, { root: null, rootMargin: '-40px', threshold: 0.15 });
+
+document.querySelectorAll('.rule-card').forEach(el => {
+  cardObserver.observe(el);
+});
+
 
 // ---- Timeline: staggered scroll-reveal per level ----
 const levelObserver = new IntersectionObserver((entries, obs) => {
