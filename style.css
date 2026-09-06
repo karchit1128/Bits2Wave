@@ -1183,3 +1183,6 @@
 .back-btn:active { transform: translateY(-50%) scale(0.95) !important; }
 
 @keyframes fadeInTab { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.problem-nav-bar { display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 40px; margin-top: -20px; }
+@media(max-width: 768px) { .problem-nav-bar { flex-direction: column; gap: 20px; } .problem-nav-bar .back-btn { position: static !important; transform: none !important; } }

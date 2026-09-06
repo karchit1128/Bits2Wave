@@ -41,11 +41,10 @@
     </section>
 
     <!-- ================= TOGGLE BUTTONS ================= -->
-    <div class="wrap text-center"
-      style="text-align: center; margin-bottom: 40px; margin-top: -20px; position: relative;">
+    <div class="wrap problem-nav-bar">
       <a href="/" class="back-btn"
-        style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); margin: 0;">&lt; BACK</a>
-      <div class="track-toggle-container">
+        style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); margin: 0; z-index: 10;">&lt; BACK</a>
+      <div class="track-toggle-container" style="margin-bottom: 0; z-index: 5;">
         <button id="btn-hardware" class="track-toggle-btn active" onclick="switchTrack('hardware')">HARDWARE</button>
         <button id="btn-software" class="track-toggle-btn" onclick="switchTrack('software')">SOFTWARE</button>
       </div>
