@@ -176,11 +176,18 @@ document.querySelectorAll('.level').forEach(el => {
     });
   });
 
-    function getBounds() {
+  function getBounds() {
     const contentWrap = document.querySelector('.content-wrap');
     if (!contentWrap) return { cols: 10, startRow: 0, endRow: 10 };
     const w = contentWrap.clientWidth;
-    const h = contentWrap.clientHeight;
+    let h = contentWrap.clientHeight;
+    
+    // Don't let pacman or ghosts enter the footer
+    const footer = document.querySelector('.new-footer');
+    if (footer) {
+      h -= footer.offsetHeight;
+    }
+    
     const cols = Math.floor(w / CELL_SIZE);
     const rows = Math.floor(h / CELL_SIZE);
     return { cols, startRow: 0, endRow: rows };
@@ -286,6 +293,7 @@ document.querySelectorAll('.level').forEach(el => {
 
         // Clamp to grid
         pacPos.col = Math.max(0, Math.min(b.cols - 1, pacPos.col));
+        pacPos.row = Math.max(b.startRow, Math.min(b.endRow - 1, pacPos.row));
 
         // Generate dots trail if chasing a ghost
         const idealPath = new Set();
