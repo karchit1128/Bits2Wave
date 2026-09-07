@@ -15,7 +15,7 @@
   }
 
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
 
   body{
     margin:0;
@@ -1206,10 +1206,11 @@
       position:fixed; top:64px; left:0; right:0; bottom:0;
       background:var(--bg); flex-direction:column; justify-content:flex-start;
       padding:34px 24px; gap:26px; transform:translateX(100%);
-      transition:transform .25s ease; z-index:40;
+      transition:transform .25s ease, visibility .25s ease; z-index:40;
       overflow-y: auto; /* allow scrolling in landscape mode */
+      visibility: hidden; /* prevent rendering bleed on mobile browsers */
     }
-    nav.links.open{transform:translateX(0);}
+    nav.links.open{transform:translateX(0); visibility:visible;}
     .burger{display:block;}
     .nav-cta{display:none;}
     nav.links .nav-cta{display:block; margin-top:10px; width:fit-content;}
