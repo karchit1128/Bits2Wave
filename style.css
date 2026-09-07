@@ -1202,19 +1202,33 @@
     .rules-grid, .ghost-grid{grid-template-columns:repeat(2,1fr);}
   }
   @media (max-width: 960px){
-    nav.links{
-      position:fixed; top:64px; left:0; right:0; bottom:0;
-      background:var(--bg); flex-direction:column; justify-content:flex-start;
-      padding:34px 24px; gap:26px; transform:translateX(100%);
-      transition:transform .25s ease, visibility .25s ease; z-index:40;
-      overflow-y: auto; /* allow scrolling in landscape mode */
-      visibility: hidden; /* prevent rendering bleed on mobile browsers */
+    /* Remove backdrop-filter from header — it makes header a containing block
+       for position:fixed children, giving the nav overlay zero height */
+    header.nav {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(6, 10, 31, 0.97); /* solid bg since blur is gone */
     }
-    nav.links.open{transform:translateX(0); visibility:visible;}
-    .burger{display:block;}
-    .nav-cta{display:none;}
-    nav.links .nav-cta{display:block; margin-top:10px; width:fit-content;}
-    form .row-2{grid-template-columns:1fr;}
+
+    nav.links{
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;  /* full viewport coverage */
+      background: #060a1f;                    /* solid, no variable */
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 80px 24px 34px;               /* 80px top clears the sticky header */
+      gap: 26px;
+      transform: translateX(100%);
+      transition: transform .3s ease, visibility .3s ease;
+      z-index: 999;                           /* above everything */
+      overflow-y: auto;
+      visibility: hidden;
+    }
+    nav.links.open { transform: translateX(0); visibility: visible; }
+    .burger { display: block; z-index: 1000; position: relative; } /* burger above overlay */
+    .nav-cta { display: none; }
+    nav.links .nav-cta { display: block; margin-top: 10px; width: fit-content; }
+    form .row-2 { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px){
     .rules-grid, .ghost-grid{grid-template-columns:1fr;}
