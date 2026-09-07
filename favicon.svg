@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Black Pac-Man facing right, mouth ~30deg open -->
+  <path d="M50,50 L95,20 A50,50 0 1,0 95,80 Z" fill="#000000"/>
+</svg>
