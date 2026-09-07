@@ -1391,19 +1391,13 @@
 
 .collab-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 25px rgba(53, 230, 255, 0.3), inset 0 0 10px rgba(53, 230, 255, 0.2);
+  box-shadow: 0 0 25px rgba(53, 230, 255, 0.3);
 }
 
 .collab-logo {
   max-width: 100%;
-  max-height: 80px;
+  max-height: 100px;
   object-fit: contain;
-  border-radius: 4px; /* Slight rounding for a cleaner look */
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.collab-card:hover .collab-logo {
-  transform: scale(1.05);
 }
 
 /* ================= NEW FOOTER ================= */
