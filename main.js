@@ -5,10 +5,13 @@ if (burger && navLinks) {
   burger.addEventListener('click', () => {
     const open = navLinks.classList.toggle('open');
     burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    // Lock body scroll when nav is open
+    document.body.style.overflow = open ? 'hidden' : '';
   });
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     navLinks.classList.remove('open');
     burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
   }));
 }
 
