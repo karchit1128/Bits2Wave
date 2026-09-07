@@ -1201,7 +1201,7 @@
   @media (max-width: 900px){
     .rules-grid, .ghost-grid{grid-template-columns:repeat(2,1fr);}
   }
-  @media (max-width: 768px){
+  @media (max-width: 960px){
     nav.links{
       position:fixed; top:64px; left:0; right:0; bottom:0;
       background:var(--bg); flex-direction:column; justify-content:flex-start;
@@ -1630,7 +1630,7 @@
 }
 
 /* ---- Allies / Collab grid: 3 → 2 → 1 cols ---- */
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .collab-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
