@@ -1201,17 +1201,18 @@
   @media (max-width: 900px){
     .rules-grid, .ghost-grid{grid-template-columns:repeat(2,1fr);}
   }
-  @media (max-width: 720px){
+  @media (max-width: 768px){
     nav.links{
       position:fixed; top:64px; left:0; right:0; bottom:0;
       background:var(--bg); flex-direction:column; justify-content:flex-start;
       padding:34px 24px; gap:26px; transform:translateX(100%);
       transition:transform .25s ease; z-index:40;
+      overflow-y: auto; /* allow scrolling in landscape mode */
     }
     nav.links.open{transform:translateX(0);}
     .burger{display:block;}
     .nav-cta{display:none;}
-    nav.links .nav-cta{display:inline-block; margin-top:10px;}
+    nav.links .nav-cta{display:block; margin-top:10px; width:fit-content;}
     form .row-2{grid-template-columns:1fr;}
   }
   @media (max-width: 640px){
@@ -1615,3 +1616,136 @@
 
 .card-footer { transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); display: inline-block; width: 100%; }
 .problem-card:hover .card-footer { transform: translateX(-5px); letter-spacing: 1px; }
+
+/* ===============================================================
+   MOBILE FIXES — all responsive issues addressed here
+   No design changes, layout-only adjustments
+   =============================================================== */
+
+/* ---- Nav: tiny screens — shrink logo text ---- */
+@media (max-width: 380px) {
+  .nav-logo { font-size: 11px; }
+  .nav-inner { padding: 12px 16px; }
+}
+
+/* ---- Allies / Collab grid: 3 → 2 → 1 cols ---- */
+@media (max-width: 768px) {
+  .collab-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .collab-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* ---- Prize Cabinets: remove fixed 320px width on mobile ---- */
+@media (max-width: 768px) {
+  .prize-cabinet {
+    width: 100%;
+    max-width: 380px;
+  }
+  .prize-cabinet-grid {
+    gap: 24px;
+    padding: 0 16px;
+  }
+}
+@media (max-width: 480px) {
+  .prize-cabinet {
+    max-width: 100%;
+  }
+}
+
+/* ---- Register: reduce arcade screen padding on phones ---- */
+@media (max-width: 640px) {
+  .arcade-screen {
+    padding: 24px 18px;
+  }
+  .submit-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}
+
+/* ---- Timeline: tighter gap & smaller node on very small phones ---- */
+@media (max-width: 420px) {
+  .level { gap: 12px; }
+  .level .node {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    font-size: 8px;
+  }
+  .levels { padding-left: 8px; }
+  .levels::before { left: 38px; }
+  .levels::after  { left: 35px; }
+}
+
+/* ---- Problem Statements page: hero title scales down on mobile ---- */
+@media (max-width: 640px) {
+  .hero h1.glitch-text {
+    font-size: clamp(1.2rem, 5vw, 2rem) !important;
+  }
+}
+
+/* ---- Modal: full mobile overhaul ---- */
+@media (max-width: 640px) {
+  .modal-content {
+    padding: 50px 18px 24px; /* extra top for close button room */
+    resize: none;             /* resize: both is useless on touch */
+    -webkit-overflow-scrolling: touch; /* smooth iOS momentum scroll */
+    max-height: 90vh;
+    width: 96%;
+    border-radius: 6px;
+  }
+
+  /* Scale down the glitch title inside the modal */
+  .modal-content h2,
+  #modal-title {
+    font-size: 15px !important;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+
+  /* Bigger, easier-to-tap close button */
+  .modal-close {
+    top: 8px;
+    right: 8px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 4px;
+  }
+
+  /* Section headings inside modal */
+  .modal-body h4 {
+    font-size: 10px !important;
+  }
+
+  /* Body text comfortable size */
+  #modal-statement,
+  #modal-details {
+    font-size: 13px !important;
+  }
+}
+
+/* ---- FAQ: full-width on mobile ---- */
+@media (max-width: 640px) {
+  .faq { max-width: 100%; }
+  .faq summary { font-size: 13px; }
+}
+
+/* ---- Ghost grid min-width guard for 480-640px range ---- */
+@media (max-width: 640px) {
+  .ghost-grid {
+    grid-template-columns: 1fr;
+  }
+}

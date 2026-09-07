@@ -83,6 +83,9 @@ document.querySelectorAll('.level').forEach(el => {
 
 // ---- Background Animation Engine ----
 (function() {
+  // Pac-Man game is mouse-driven — skip entirely on touch-only devices (phones/tablets)
+  if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+
   const CELL_SIZE = 42;
   const pacman = document.getElementById('pacman');
   const baseGhosts = document.querySelectorAll('.ghost');
