@@ -1398,13 +1398,24 @@
   max-width: 100%;
   max-height: 80px;
   object-fit: contain;
-  /* Add a drop shadow to make white logos pop on the dark background */
-  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.3s ease;
+  
+  /* 
+   * Magic trick for dark mode logos:
+   * 1. grayscale(1) makes it black & white.
+   * 2. invert(1) turns the white background to black, and the black logo to white.
+   * 3. mix-blend-mode: screen makes the black background completely transparent!
+   * 4. brightness and contrast adjust to make it a crisp white.
+   */
+  filter: grayscale(1) invert(1) brightness(1.5) contrast(100);
+  mix-blend-mode: screen;
+  opacity: 0.7;
 }
 
 .collab-card:hover .collab-logo {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  opacity: 1;
+  filter: grayscale(1) invert(1) brightness(2) contrast(100) drop-shadow(0 0 8px rgba(53, 230, 255, 0.5));
 }
 
 /* ================= NEW FOOTER ================= */
