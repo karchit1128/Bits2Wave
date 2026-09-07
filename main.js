@@ -1,3 +1,7 @@
+// ---- Vercel Analytics ----
+import { inject } from '@vercel/analytics';
+inject();
+
 // ---- mobile nav ----
 const burger = document.getElementById('burgerBtn');
 const navLinks = document.getElementById('navLinks');
