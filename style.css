@@ -1208,6 +1208,7 @@
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
       background: rgba(6, 10, 31, 0.97); /* solid bg since blur is gone */
+      z-index: 1000; /* stay above the nav overlay (999) so burger is always visible */
     }
 
     nav.links{
@@ -1220,12 +1221,12 @@
       gap: 26px;
       transform: translateX(100%);
       transition: transform .3s ease, visibility .3s ease;
-      z-index: 999;                           /* above everything */
+      z-index: 999;                           /* below header (1000), above page content */
       overflow-y: auto;
       visibility: hidden;
     }
     nav.links.open { transform: translateX(0); visibility: visible; }
-    .burger { display: block; z-index: 1000; position: relative; } /* burger above overlay */
+    .burger { display: block; } /* burger is inside header which is z-index:1000 */
     .nav-cta { display: none; }
     nav.links .nav-cta { display: block; margin-top: 10px; width: fit-content; }
     form .row-2 { grid-template-columns: 1fr; }
