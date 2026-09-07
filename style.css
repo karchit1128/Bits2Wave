@@ -1181,70 +1181,7 @@
   .confirm h3{font-family:'Press Start 2P', monospace; color:var(--yellow); font-size:14px; margin:14px 0 10px;}
   .confirm p{color:var(--dim); font-size:13px;}
 
-  /* ================= ALLIES / COLLABS ================= */
-  .collab-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    margin-top: 40px;
-  }
 
-  .collab-card {
-    background: var(--panel);
-    border: 3px solid var(--cyan);
-    border-radius: 12px;
-    padding: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 150px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 0 15px rgba(53,230,255,0.1);
-  }
-
-  .collab-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%; width: 50%; height: 100%;
-    background: linear-gradient(to right, transparent, rgba(53,230,255,0.3), transparent);
-    transform: skewX(-20deg);
-    transition: none;
-  }
-
-  .collab-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.6), 0 0 20px rgba(53,230,255,0.4), inset 0 0 25px rgba(53,230,255,0.2);
-    border-color: var(--white);
-  }
-
-  .collab-card:hover::before {
-    animation: shine 0.75s;
-  }
-
-  @keyframes shine {
-    100% { left: 200%; }
-  }
-
-  .collab-logo {
-    max-height: 80px;
-    max-width: 200px;
-    object-fit: contain;
-    filter: grayscale(1) brightness(0) invert(1) drop-shadow(0 0 8px rgba(53,230,255,0.6));
-    opacity: 0.9;
-    transition: all 0.3s ease;
-    z-index: 1;
-  }
-
-  .collab-card:hover .collab-logo {
-    transform: scale(1.1);
-    opacity: 1;
-    filter: grayscale(1) brightness(0) invert(1) drop-shadow(0 0 15px var(--cyan));
-  }
   /* ================= FAQ ================= */
   .faq{max-width:720px; margin:0 auto;}
   .faq details{
