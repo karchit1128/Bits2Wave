@@ -1,3 +1,6 @@
+import { inject } from '@vercel/analytics';
+inject();
+
 // ---- mobile nav ----
 const burger = document.getElementById('burgerBtn');
 const navLinks = document.getElementById('navLinks');
@@ -17,7 +20,7 @@ if (burger && navLinks) {
 
 // ---- countdown ----
 // Set to a target date
-const TARGET_DATE = new Date('2026-09-26T23:59:59');
+const TARGET_DATE = new Date('2026-10-05T23:59:59');
 
 function updateCountdown(){
   const now = new Date();
