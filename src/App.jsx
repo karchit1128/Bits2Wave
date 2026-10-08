@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import './index.css';
 import NotFound from './components/NotFound';
@@ -6,6 +6,9 @@ import Home from './components/Home';
 import ProblemStatements from './components/ProblemStatements';
 
 const validHashes = ['', '#top', '#play', '#about', '#tracks', '#prizes', '#timeline', '#faq', '#contact'];
+
+// Global scroll target — set by Navbar before page switch, consumed by Home on mount
+window.__pendingScrollTarget = null;
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;600;800&display=swap');
 /* BITS2WAVE — 24-Hour Hackathon | Website template */
 :root {
   --navy: #0b1f3a;
@@ -31,7 +32,7 @@ a {
 }
 
 .bang {
-  font-family: Bangers, cursive;
+  font-family: 'Bangers', cursive;
   letter-spacing: 2px;
 }
 
@@ -273,7 +274,7 @@ nav ul a:hover:after {
 }
 
 .btn {
-  font-family: Bangers;
+  font-family: 'Bangers';
   font-size: 24px;
   letter-spacing: 2px;
   padding: 14px 30px;
@@ -439,7 +440,7 @@ canvas {
 }
 
 .msg span {
-  font-family: Bangers;
+  font-family: 'Bangers';
   font-size: clamp(32px, 6vw, 58px);
   color: #fff;
   -webkit-text-stroke: 2px var(--navy);
@@ -485,7 +486,7 @@ canvas {
 }
 
 .who h4 {
-  font-family: Bangers;
+  font-family: 'Bangers';
   font-size: 24px;
   letter-spacing: 1px;
 }
@@ -519,14 +520,14 @@ canvas {
 }
 
 .step .n {
-  font-family: Bangers;
+  font-family: 'Bangers';
   font-size: 54px;
   color: var(--red);
   line-height: 1;
 }
 
 .step h3 {
-  font-family: Bangers;
+  font-family: 'Bangers';
   font-size: 32px;
   letter-spacing: 2px;
   margin: 6px 0;
@@ -575,7 +576,7 @@ canvas {
 }
 
 .track h3 {
-  font-family: Bangers;
+  font-family: 'Bangers';
   font-size: 34px;
   letter-spacing: 2px;
 }
@@ -631,7 +632,7 @@ canvas {
 }
 
 .pod h4 {
-  font-family: Bangers;
+  font-family: 'Bangers';
   font-size: 28px;
   letter-spacing: 2px;
 }
@@ -782,7 +783,7 @@ details p {
 }
 
 .contact b {
-  font-family: Bangers;
+  font-family: 'Bangers';
   font-size: 28px;
   letter-spacing: 2px;
   display: block;
@@ -888,7 +889,7 @@ footer .logo span {
 }
 
 .wood-sign h2 {
-  font-family: Bangers, cursive;
+  font-family: 'Bangers', cursive;
   font-size: clamp(40px, 8vw, 70px);
   color: #112a46;
   margin: 0;
@@ -1032,7 +1033,7 @@ footer .logo span {
 }
 
 .t-card h3 {
-  font-family: Bangers, cursive;
+  font-family: 'Bangers', cursive;
   font-size: 34px;
   letter-spacing: 2px;
   color: #0b1f3a;
@@ -1280,4 +1281,5 @@ footer::before {
     text-align: left;
     margin-top: 20px;
   }
+/* trigger hmr */
 }

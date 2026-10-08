@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import GameSection from './GameSection';
@@ -24,18 +24,26 @@ export default function Home() {
     return () => io.disconnect();
   }, []);
 
-  // Handle instant jump to hash on initial page load without smooth sliding
-  useEffect(() => {
+  // Scroll to hash section immediately after DOM mutations, before paint
+  useLayoutEffect(() => {
     if (window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      requestAnimationFrame(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+  }, []);
+
+  // Consume pending scroll target set by Navbar when coming from PS page (SPA nav)
+  useEffect(() => {
+    const target = window.__pendingScrollTarget;
+    if (target) {
+      window.__pendingScrollTarget = null;
       setTimeout(() => {
-        const el = document.querySelector(window.location.hash);
-        if (el) {
-          const originalBehavior = document.documentElement.style.scrollBehavior;
-          document.documentElement.style.scrollBehavior = 'auto'; // Force instant jump
-          el.scrollIntoView();
-          document.documentElement.style.scrollBehavior = originalBehavior; // Restore smooth scrolling
-        }
-      }, 50);
+        const el = document.getElementById(target);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 80);
     }
   }, []);
 

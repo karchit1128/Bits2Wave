@@ -1,6 +1,7 @@
 import { useState, useEffect, useLayoutEffect } from 'react';
 import { hardwarePS, softwarePS } from '../data/psData';
 import Footer from './Footer';
+import Navbar from './Navbar';
 import './ProblemStatements.css';
 
 export default function ProblemStatements() {
@@ -12,7 +13,7 @@ export default function ProblemStatements() {
     const original = document.documentElement.style.scrollBehavior;
     document.documentElement.style.scrollBehavior = 'auto';
     window.scrollTo(0, 0);
-    
+
     // Wait a tick before restoring smooth scroll to prevent CSS batching
     const timer = setTimeout(() => {
       document.documentElement.style.scrollBehavior = original;
@@ -24,7 +25,7 @@ export default function ProblemStatements() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const track = params.get('track');
-    
+
     if (track === 'software') {
       setActiveTrack('software');
     } else if (track === 'hardware') {
@@ -46,6 +47,10 @@ export default function ProblemStatements() {
     e.preventDefault();
     window.history.pushState({}, '', '/#tracks');
     window.dispatchEvent(new Event('popstate'));
+    setTimeout(() => {
+      const el = document.getElementById('tracks');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
 
   const activeData = activeTrack === 'hardware' ? hardwarePS : softwarePS;
@@ -62,23 +67,21 @@ export default function ProblemStatements() {
 
   return (
     <div className="ps-page">
-      <nav className="ps-nav">
-        <a href="/" onClick={goHome} className="logo bang">BITS<span>2</span>WAVE</a>
-        <a href="/" onClick={goHome} className="back-btn btn btn-white">← Back to Base</a>
-      </nav>
+      <Navbar />
 
-      <header className="ps-header">
+      <header className="ps-header" style={{ position: 'relative' }}>
+        <a href="/" onClick={goHome} className="back-btn btn btn-white" style={{ position: 'absolute', left: '5vw', top: '140px' }}>← BACK TO BASE</a>
         <h1 className="h2 bang reveal in">Problem <span>Statements</span></h1>
         <p className="sub reveal in">Choose your domain and find the challenge you want to tackle.</p>
-        
+
         <div className="track-toggle reveal in">
-          <button 
+          <button
             className={`toggle-btn ${activeTrack === 'hardware' ? 'active' : ''}`}
             onClick={() => handleToggle('hardware')}
           >
             ⚙️ Hardware
           </button>
-          <button 
+          <button
             className={`toggle-btn ${activeTrack === 'software' ? 'active' : ''}`}
             onClick={() => handleToggle('software')}
           >
@@ -102,7 +105,7 @@ export default function ProblemStatements() {
           </div>
         ))}
       </div>
-      
+
       <Footer />
 
       {selectedPS && (
