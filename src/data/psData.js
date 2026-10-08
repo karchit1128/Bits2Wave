@@ -8,7 +8,7 @@ export const hardwarePS = [
   },
   {
     "id": "PS2",
-    "title": "Ground-Searching &quot;Foxhunt&quot; Radio Direction Finder",
+    "title": "Ground-Searching \"Foxhunt\" Radio Direction Finder",
     "track": "HARDWARE",
     "description": "Design a handheld, ergonomic search-and-rescue direction finder that processes rapid RSSI fluctuations to guide an operator directly toward a hidden beacon (useful for avalanche/landslide rescue).",
     "details": "Locating downed transmitters or emergency beacons requires translating invisible RF signals into human-readable directions. This project involves building a highly directional antenna wand coupled with a microcontroller that filters noisy RSSI data and provides real-time audiovisual feedback (pitch shifting or bar graphs) proportional to signal strength."
