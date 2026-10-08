@@ -1,5 +1,6 @@
 import { useState, useEffect, useLayoutEffect } from 'react';
 import { hardwarePS, softwarePS } from '../data/psData';
+import Footer from './Footer';
 import './ProblemStatements.css';
 
 export default function ProblemStatements() {
@@ -101,6 +102,8 @@ export default function ProblemStatements() {
           </div>
         ))}
       </div>
+      
+      <Footer />
 
       {selectedPS && (
         <div className="ps-modal-overlay" onClick={() => setSelectedPS(null)}>
