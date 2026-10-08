@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import './index.css';
 import NotFound from './components/NotFound';
 import Home from './components/Home';
@@ -26,14 +27,29 @@ function App() {
   }, []);
 
   if (currentPath === '/problem-statements') {
-    return <ProblemStatements />;
+    return (
+      <>
+        <ProblemStatements />
+        <Analytics />
+      </>
+    );
   }
 
   if (currentPath !== '/' || !validHashes.includes(currentHash)) {
-    return <NotFound />;
+    return (
+      <>
+        <NotFound />
+        <Analytics />
+      </>
+    );
   }
 
-  return <Home />;
+  return (
+    <>
+      <Home />
+      <Analytics />
+    </>
+  );
 }
 
 export default App;
