@@ -1,131 +1,112 @@
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { hardwarePS, softwarePS } from '../data/psData';
-import Footer from './Footer';
 import Navbar from './Navbar';
+import Footer from './Footer';
 import './ProblemStatements.css';
 
+const atlasX = ['0%', '25%', '50%', '75%', '100%'];
+const atlasY = ['0%', '33.333%', '66.667%', '100%'];
+
 export default function ProblemStatements() {
-  const [activeTrack, setActiveTrack] = useState('hardware');
+  const initialTrack = new URLSearchParams(window.location.search).get('track') === 'hardware' ? 'hardware' : 'software';
+  const [activeTrack, setActiveTrack] = useState(initialTrack);
   const [selectedPS, setSelectedPS] = useState(null);
 
-  // Instantly jump to top before browser paints
-  useLayoutEffect(() => {
-    const original = document.documentElement.style.scrollBehavior;
-    document.documentElement.style.scrollBehavior = 'auto';
-    window.scrollTo(0, 0);
+  useLayoutEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, []);
 
-    // Wait a tick before restoring smooth scroll to prevent CSS batching
-    const timer = setTimeout(() => {
-      document.documentElement.style.scrollBehavior = original;
-    }, 50);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Read query parameter on mount to set initial track
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const track = params.get('track');
-
-    if (track === 'software') {
-      setActiveTrack('software');
-    } else if (track === 'hardware') {
-      setActiveTrack('hardware');
-    } else {
-      // If the track is missing or invalid, default to hardware and fix the URL
-      setActiveTrack('hardware');
-      window.history.replaceState({}, '', '/problem-statements?track=hardware');
-    }
-  }, []);
+    document.body.style.overflow = selectedPS ? 'hidden' : '';
+    const close = (event) => event.key === 'Escape' && setSelectedPS(null);
+    window.addEventListener('keydown', close);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', close);
+    };
+  }, [selectedPS]);
 
   const handleToggle = (track) => {
     setActiveTrack(track);
-    // Update URL without reloading
+    setSelectedPS(null);
     window.history.replaceState({}, '', `/problem-statements?track=${track}`);
   };
 
-  const goHome = (e) => {
-    e.preventDefault();
-    window.history.pushState({}, '', '/#tracks');
-    window.dispatchEvent(new Event('popstate'));
-    setTimeout(() => {
-      const el = document.getElementById('tracks');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
-
   const activeData = activeTrack === 'hardware' ? hardwarePS : softwarePS;
-
-  // Prevent background scrolling when modal is open
-  useEffect(() => {
-    if (selectedPS) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [selectedPS]);
+  const label = activeTrack === 'hardware' ? 'Hardware' : 'Software';
 
   return (
-    <div className="ps-page">
+    <main className="ps-page">
       <Navbar />
-
-      <header className="ps-header">
-        <a href="/" onClick={goHome} className="back-btn btn btn-white">← BACK TO BASE</a>
-        <h1 className="h2 bang reveal in">Problem <span>Statements</span></h1>
-        <p className="sub reveal in">Choose your domain and find the challenge you want to tackle.</p>
-
-        <div className="track-toggle reveal in">
-          <button
-            className={`toggle-btn ${activeTrack === 'hardware' ? 'active' : ''}`}
-            onClick={() => handleToggle('hardware')}
-          >
-            ⚙️ Hardware
-          </button>
-          <button
-            className={`toggle-btn ${activeTrack === 'software' ? 'active' : ''}`}
-            onClick={() => handleToggle('software')}
-          >
-            💻 Software
-          </button>
+      <header className="ps-hero">
+        <p className="ps-eyebrow">Problem Statements</p>
+        <h1><span>{label}</span> Domain</h1>
+        <div className="ps-stats" aria-label="Page highlights">
+          <span><i>✦</i><b>{activeData.length}</b> Problem Statements</span>
+          <span><i>▦</i>Build Real Solutions</span>
+          <span><i>●</i>Create Real Impact</span>
+        </div>
+        
+        <div className="track-toggle" data-active={activeTrack} role="tablist" aria-label="Problem statement track">
+          <button role="tab" aria-selected={activeTrack === 'hardware'} className={activeTrack === 'hardware' ? 'active' : ''} onClick={() => handleToggle('hardware')}>Hardware</button>
+          <button role="tab" aria-selected={activeTrack === 'software'} className={activeTrack === 'software' ? 'active' : ''} onClick={() => handleToggle('software')}>Software</button>
         </div>
       </header>
 
-      <div className="ps-grid">
-        {activeData.map((ps) => (
-          <div key={ps.id} className="ps-card reveal in" onClick={() => setSelectedPS(ps)}>
-            <div className="ps-card-header">
-              <span className="ps-badge">{ps.id}</span>
-              <span className="ps-track-tag">{ps.track}</span>
-            </div>
-            <h3 className="ps-title">{ps.title}</h3>
-            <p className="ps-desc">{ps.description}</p>
-            <div className="ps-card-footer">
-              CLICK FOR FULL PS &raquo;
-            </div>
-          </div>
-        ))}
-      </div>
+      <section className="ps-content" aria-label={`${label} problem statements`}>
+        <div className="ps-grid">
+          {activeData.map((ps, index) => (
+            <button
+              type="button"
+              key={ps.id}
+              className={`ps-card ${index % 2 ? 'ps-card-dark' : 'ps-card-light'}`}
+              onClick={() => setSelectedPS(ps)}
+              style={{
+                '--delay': `${Math.min(index, 15) * 35}ms`,
+              }}
+            >
+              <span className="ps-card-number">{ps.id.replace('PS', '').padStart(2, '0')}</span>
+              <span className="ps-feather" aria-hidden="true">⌁</span>
+              <span className="ps-card-clouds" aria-hidden="true" />
+              <span className="ps-card-scenery" aria-hidden="true"><i /><i /><i /></span>
+              <span
+                className={`ps-card-art art-${index}`}
+                aria-hidden="true"
+                style={{
+                  backgroundPosition: `${atlasX[index % 5]} ${atlasY[Math.floor((index % 20) / 5)]}`,
+                }}
+              />
+              <span className="ps-card-copy">
+                <strong>{ps.title}</strong>
+                <span className="ps-card-desc">{ps.description}</span>
+              </span>
+              <span className="ps-open" aria-hidden="true">→</span>
+            </button>
+          ))}
+        </div>
+        <p className="ps-endnote">Pick a challenge. Build something that matters.</p>
+      </section>
 
       <Footer />
 
       {selectedPS && (
-        <div className="ps-modal-overlay" onClick={() => setSelectedPS(null)}>
-          <div className="ps-modal" onClick={e => e.stopPropagation()}>
-            <button className="ps-modal-close" onClick={() => setSelectedPS(null)}>✕</button>
-            <div className="ps-modal-header">
-              <span className="ps-badge">{selectedPS.id}</span>
-              <span className="ps-track-tag">{selectedPS.track}</span>
+        <div className="ps-modal-overlay" onMouseDown={() => setSelectedPS(null)} role="presentation">
+          <article className="ps-modal" role="dialog" aria-modal="true" aria-labelledby="ps-modal-title" onMouseDown={event => event.stopPropagation()}>
+            <button className="ps-modal-close" onClick={() => setSelectedPS(null)} aria-label="Close problem statement">×</button>
+            <div className="ps-modal-kicker"><span>{selectedPS.id}</span><span>{selectedPS.track}</span></div>
+            <h2 id="ps-modal-title">{selectedPS.title}</h2>
+            <div className="ps-modal-scene" aria-hidden="true">
+              <img src="/modal-scene-reference-v3.png" alt="" />
             </div>
-            <h2 className="ps-modal-title">{selectedPS.title}</h2>
-            <div className="ps-modal-content">
-              <h4>Objective:</h4>
-              <p>{selectedPS.description}</p>
-              <h4>Mission Details:</h4>
-              <p>{selectedPS.details}</p>
+            <div className="ps-modal-section">
+              <span className="ps-modal-section-icon ps-target-icon" aria-hidden="true">◎</span>
+              <div><h3>The challenge</h3><p>{selectedPS.description}</p></div>
             </div>
-          </div>
+            <div className="ps-modal-section">
+              <span className="ps-modal-section-icon ps-document-icon" aria-hidden="true">▤</span>
+              <div><h3>Mission details</h3><p>{selectedPS.details}</p></div>
+            </div>
+          </article>
         </div>
       )}
-    </div>
+    </main>
   );
 }

@@ -1,6 +1,35 @@
+import { useEffect, useState, useRef } from 'react';
+
 export default function Navbar() {
-  const toggleMenu = () => document.querySelector('nav ul')?.classList.toggle('open');
-  const closeMenu = () => document.querySelector('nav ul')?.classList.remove('open');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navRef = useRef(null);
+
+  const toggleMenu = () => {
+    setMenuOpen(open => !open);
+  };
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  useEffect(() => {
+    const handleKey = event => event.key === 'Escape' && closeMenu();
+    const handleResize = () => window.innerWidth > 820 && closeMenu();
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        closeMenu();
+      }
+    };
+    
+    window.addEventListener('keydown', handleKey);
+    window.addEventListener('resize', handleResize);
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKey);
+      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleProblems = (e) => {
     e.preventDefault();
@@ -10,10 +39,22 @@ export default function Navbar() {
   };
 
   return (
-    <nav>
+    <nav ref={navRef} className={menuOpen ? 'menu-open' : ''}>
       <a href="/#top" className="logo bang">BITS<span>2</span>WAVE</a>
-      <button className="menu" onClick={toggleMenu}>☰</button>
-      <ul>
+      <button
+        className={`menu ${menuOpen ? 'open' : ''}`}
+        type="button"
+        aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={menuOpen}
+        onClick={toggleMenu}
+      >
+        <div className="hamburger" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <ul className={menuOpen ? 'open' : ''}>
         <li><a href="/#play" onClick={closeMenu}>Play</a></li>
         <li><a href="/#about" onClick={closeMenu}>About</a></li>
         <li><a href="/#tracks" onClick={closeMenu}>Tracks</a></li>
