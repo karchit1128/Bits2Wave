@@ -11,6 +11,13 @@
 .ps-header {
   padding: 140px 5vw 40px;
   text-align: center;
+  position: relative;
+}
+
+.ps-header .back-btn {
+  position: absolute;
+  left: 5vw;
+  top: 140px;
 }
 
 .track-toggle {
@@ -221,4 +228,17 @@
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .ps-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 110px;
+  }
+  .ps-header .back-btn {
+    position: static;
+    margin-bottom: 24px;
+  }
 }

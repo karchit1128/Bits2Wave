@@ -69,8 +69,8 @@ export default function ProblemStatements() {
     <div className="ps-page">
       <Navbar />
 
-      <header className="ps-header" style={{ position: 'relative' }}>
-        <a href="/" onClick={goHome} className="back-btn btn btn-white" style={{ position: 'absolute', left: '5vw', top: '140px' }}>← BACK TO BASE</a>
+      <header className="ps-header">
+        <a href="/" onClick={goHome} className="back-btn btn btn-white">← BACK TO BASE</a>
         <h1 className="h2 bang reveal in">Problem <span>Statements</span></h1>
         <p className="sub reveal in">Choose your domain and find the challenge you want to tackle.</p>
 
