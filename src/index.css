@@ -1717,7 +1717,7 @@ details p {
   justify-content: center;
   gap: 14px;
   max-width: 1000px;
-  margin: auto;
+  margin: 30px auto 0;
 }
 
 .org {
@@ -1725,8 +1725,31 @@ details p {
   border: 2px dashed #9fb3c8;
   border-radius: 14px;
   padding: 14px 20px;
-  font-weight: 600;
-  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  min-height: 90px;
+}
+
+.org img {
+  height: auto;
+  max-height: 75px;
+  width: auto;
+  max-width: 240px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .org {
+    min-width: 130px;
+    min-height: 70px;
+    padding: 10px 14px;
+  }
+  .org img {
+    max-height: 50px;
+    max-width: 140px;
+  }
 }
 
 .contacts {
