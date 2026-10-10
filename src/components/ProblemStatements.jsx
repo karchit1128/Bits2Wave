@@ -93,7 +93,7 @@ export default function ProblemStatements() {
         <div className="ps-modal-overlay" onMouseDown={() => setSelectedPS(null)} role="presentation">
           <article className="ps-modal" role="dialog" aria-modal="true" aria-labelledby="ps-modal-title" onMouseDown={event => event.stopPropagation()}>
             <button className="ps-modal-close" onClick={() => setSelectedPS(null)} aria-label="Close problem statement">×</button>
-            <div className="ps-modal-kicker"><span>{selectedPS.id}</span><span>{selectedPS.track}</span></div>
+            <div className="ps-modal-kicker"><span>{selectedPS.track === 'HARDWARE' ? 'HW-' : selectedPS.track === 'SOFTWARE' ? 'SW-' : selectedPS.track === 'HYBRID' ? 'HY-' : ''}{selectedPS.id.replace('PS', '')}</span><span>{selectedPS.track}</span></div>
             <h2 id="ps-modal-title">{selectedPS.title}</h2>
             <div className="ps-modal-scene" aria-hidden="true">
               <img src="/modal-scene-reference-v3.png" alt="" />
