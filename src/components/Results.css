@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800&family=Nunito:wght@500;600;700;800;900&display=swap');
+
+.results-page {
+  --ps-navy: #09253d;
+  --ps-red: #ed1b2e;
+  --ps-gold: #ffd58d;
+  min-height: 100vh;
+  color: var(--ps-navy);
+  background: #f5eedf;
+  font-family: 'Nunito', sans-serif;
+}
+
+.results-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 250px;
+  padding: 22px 24px 28px;
+  overflow: hidden;
+  text-align: center;
+  background: radial-gradient(circle at 49% 28%, rgba(255, 255, 255, .96) 0 7%, transparent 27%), linear-gradient(180deg, #fffaf0 0%, #fbf0da 100%);
+  border-bottom: 1px solid rgba(103, 77, 39, .16);
+}
+
+.results-eyebrow {
+  margin: 19px 0 7px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .42em;
+  text-transform: uppercase;
+}
+
+.results-hero h1 {
+  margin: 0;
+  font: italic 900 clamp(54px, 6vw, 78px)/.95 'Barlow Condensed', sans-serif;
+  letter-spacing: .025em;
+  text-transform: uppercase;
+  text-shadow: 0 3px 0 rgba(255, 255, 255, .9);
+}
+
+.results-hero h1 span {
+  color: var(--ps-red);
+}
+
+.results-stats {
+  display: flex;
+  justify-content: center;
+  gap: clamp(28px, 7vw, 95px);
+  margin-top: 23px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.results-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.results-stats i {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border: 2px solid var(--ps-red);
+  border-radius: 50%;
+  color: var(--ps-red);
+  font-style: normal;
+  line-height: 1;
+}
+
+.results-content {
+  padding: 42px 16px 48px;
+  background: linear-gradient(180deg, #f8f0df, #fff9eb 18%, #f8edd7);
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  width: min(1280px, 100%);
+  margin: 0 auto;
+}
+
+.team-card {
+  background: #fff;
+  border: 2px solid rgba(111, 77, 35, .15);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 5px 14px rgba(65, 46, 23, .14);
+  transition: transform .2s, box-shadow .2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 26px rgba(57, 39, 19, .22);
+}
+
+.team-card-header {
+  height: 120px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(111, 77, 35, .1);
+}
+
+.team-card-lavender .team-card-header { background: #e9e4f3; color: #827294; }
+.team-card-sage .team-card-header { background: #e4eddc; color: #6b8656; }
+.team-card-peach .team-card-header { background: #f5e6d8; color: #b98665; }
+.team-card-blue .team-card-header { background: #e1ebf1; color: #66889c; }
+.team-card-yellow .team-card-header { background: #f3efd6; color: #a9994c; }
+.team-card-pink .team-card-header { background: #f0e1e6; color: #ac798d; }
+
+.team-id {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 4px 8px;
+  border-radius: 6px;
+  z-index: 2;
+}
+
+.team-status {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 2;
+}
+
+.team-symbol {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 80px;
+  line-height: 1;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.team-card-body {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.team-name {
+  font: 900 24px/1 'Barlow Condensed', sans-serif;
+  margin: 0 0 4px;
+  color: var(--ps-navy);
+}
+
+.team-project {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ps-red);
+  margin: 0 0 12px;
+}
+
+.team-leader {
+  font-size: 13px;
+  color: #304757;
+  margin-bottom: 6px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(111, 77, 35, .1);
+}
+
+.team-members {
+  font-size: 12px;
+  color: #5b6f7f;
+  margin-bottom: 12px;
+}
+
+.team-tagline {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4b6375;
+  margin: auto 0 0;
+  font-style: italic;
+}
+
+.results-endnote {
+  margin: 36px auto 0;
+  text-align: center;
+  font: 800 15px 'Nunito', sans-serif;
+  letter-spacing: .03em;
+  opacity: .65;
+}
+
+@media(max-width:720px) {
+  .results-hero {
+    min-height: 220px;
+    padding-top: 66px;
+  }
+  .results-hero h1 {
+    font-size: 52px;
+  }
+  .results-stats {
+    gap: 10px;
+    margin-top: 21px;
+  }
+  .results-stats span {
+    font-size: 9px;
+  }
+  .results-stats i {
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
+  }
+}
