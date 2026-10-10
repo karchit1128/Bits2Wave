@@ -33,7 +33,7 @@ export default function Hero() {
 
       <img className="org-strip" src="organisers-strip.png" alt="Organizers" onError={(e) => e.target.classList.add('hide')} />
       <h1 style={{ margin: 0 }}>
-        <img className="logo-img" src="bits2wave-logo.png" alt="Bits2Wave" onLoad={() => document.getElementById('logoFallback').classList.add('hide')} onError={(e) => e.target.classList.add('hide')} />
+        <img className="logo-img" src="/bits2wave-logo-v2.png" alt="Bits2Wave" onLoad={() => document.getElementById('logoFallback').classList.add('hide')} onError={(e) => e.target.classList.add('hide')} />
       </h1>
       <div id="logoFallback">
         <div className="binary">1 0 1 1 0 0 1 0 1 0 0 1 0 1 1</div>
