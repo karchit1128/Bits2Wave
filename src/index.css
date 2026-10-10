@@ -122,6 +122,26 @@ nav ul a:hover:after {
   width: 100%;
 }
 
+nav ul .nav-register {
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: var(--red);
+  box-shadow: 0 4px 0 #a80e19, 0 7px 14px rgba(168, 14, 25, .2);
+  color: #fff;
+  font-weight: 800;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+nav ul .nav-register:hover {
+  background: #f0222b;
+  box-shadow: 0 3px 0 #a80e19, 0 6px 12px rgba(168, 14, 25, .22);
+  transform: translateY(1px);
+}
+
+nav ul .nav-register::after {
+  display: none;
+}
+
 .menu {
   display: none;
   background: none;
@@ -1962,7 +1982,7 @@ footer .logo span {
   }
 
   nav.menu-open {
-    max-height: 460px;
+    max-height: 520px;
     background: rgba(255, 252, 245, 0.98);
   }
 
@@ -2009,6 +2029,19 @@ footer .logo span {
 
   nav ul a:after {
     display: none;
+  }
+
+  nav ul .nav-register {
+    width: min(220px, 82%);
+    margin: 7px auto 2px;
+    padding: 12px 18px;
+    color: #fff;
+  }
+
+  nav ul .nav-register:hover,
+  nav ul .nav-register:active {
+    background: #f0222b;
+    color: #fff;
   }
 
   .menu {

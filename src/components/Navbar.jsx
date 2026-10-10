@@ -63,6 +63,7 @@ export default function Navbar() {
         <li><a href="/#timeline" onClick={closeMenu}>Timeline</a></li>
         <li><a href="/#faq" onClick={closeMenu}>FAQ</a></li>
         <li><a href="/#contact" onClick={closeMenu}>Contact</a></li>
+        <li><a className="nav-register" href="https://unstop.com/p/bits2wave-bms-institute-of-technology-and-management-bmsitm-bangalore-1761893" target="_blank" rel="noopener noreferrer" onClick={closeMenu}>Register</a></li>
       </ul>
     </nav>
   );
