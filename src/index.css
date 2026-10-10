@@ -799,6 +799,115 @@ canvas {
     #fff7e7;
 }
 
+.about-overview {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(320px, .85fr);
+  gap: 42px;
+  max-width: 1180px;
+  margin: 0 auto 40px;
+  padding: 40px 44px;
+  overflow: hidden;
+  border: 2px solid #345675;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(49, 169, 232, .17), transparent 35%),
+    rgba(255, 253, 247, .96);
+  box-shadow: 0 13px 28px rgba(66, 48, 22, .15);
+}
+
+.about-overview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  background: linear-gradient(180deg, var(--red), #ff4a57);
+}
+
+.about-overview-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.about-kicker {
+  display: inline-flex;
+  margin-bottom: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--red);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.about-title {
+  margin-bottom: 14px;
+  font-size: clamp(40px, 4.5vw, 58px);
+  font-style: italic;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.about-title span {
+  color: var(--red);
+}
+
+.about-overview-copy p {
+  max-width: 720px;
+  color: #29435d;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.about-overview-copy p + p {
+  margin-top: 12px;
+}
+
+.about-facts {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-content: center;
+}
+
+.about-facts div {
+  display: flex;
+  min-height: 104px;
+  padding: 16px 12px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(52, 86, 117, .25);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, .82);
+  box-shadow: 0 6px 14px rgba(52, 86, 117, .09);
+  text-align: center;
+}
+
+.about-facts strong {
+  color: var(--red);
+  font-family: 'Bangers', cursive;
+  font-size: 35px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.about-facts span {
+  margin-top: 6px;
+  color: #29435d;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
 #about .h2 {
   margin-bottom: 3px;
   font-size: clamp(44px, 5.5vw, 66px);
@@ -924,6 +1033,12 @@ canvas {
 }
 
 @media (max-width: 900px) {
+  .about-overview {
+    grid-template-columns: 1fr;
+    gap: 26px;
+    max-width: 660px;
+  }
+
   .steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 54px 28px;
@@ -938,6 +1053,28 @@ canvas {
 @media (max-width: 520px) {
   #about {
     padding-inline: 22px;
+  }
+
+  .about-overview {
+    margin-bottom: 72px;
+    padding: 30px 22px 24px 27px;
+  }
+
+  .about-overview-copy p {
+    font-size: 13px;
+  }
+
+  .about-facts {
+    gap: 9px;
+  }
+
+  .about-facts div {
+    min-height: 92px;
+    padding-inline: 8px;
+  }
+
+  .about-facts strong {
+    font-size: 31px;
   }
 
   .steps {
@@ -1282,6 +1419,10 @@ canvas {
   border-radius: 0;
   background: url('/prize-card-board-v1.png') center / 100% 100% no-repeat;
   filter: drop-shadow(0 11px 9px rgba(75, 46, 16, .18));
+}
+
+.prize-board-single {
+  grid-template-columns: 1fr;
 }
 
 .prize-award {

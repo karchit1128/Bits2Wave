@@ -28,8 +28,8 @@ export default function GameSection() {
       <div className="game-wrap reveal">
         <canvas id="game" ref={canvasRef}></canvas>
         <div className="hud">
-          <div className="hud-stat hud-score"><img src="/play-red-bird-v1.png" alt="" />Score: <span id="score">0</span></div>
-          <div className="hud-stat hud-shots"><img src="/play-green-pig-v2.png" alt="" />Bots left: <span id="shots">3</span></div>
+          <div className="hud-stat hud-score"><img src="/play-green-pig-v2.png" alt="" />Score: <span id="score">0</span></div>
+          <div className="hud-stat hud-shots"><img src="/play-red-bird-v1.png" alt="" />Bots left: <span id="shots">3</span></div>
           <button className="btn btn-red" id="reset">Reset</button>
         </div>
         <div className="msg" id="msg"><span id="msgText">SHIP IT!</span></div>

@@ -1,6 +1,21 @@
 export default function About() {
   return (
     <section id="about">
+      <div className="about-overview reveal">
+        <div className="about-overview-copy">
+          <span className="about-kicker">24-Hour National-Level Hackathon</span>
+          <h2 className="about-title bang">What Is <span>Bits2Wave?</span></h2>
+          <p>Bits2Wave is an innovation challenge where college students turn an early idea into a working prototype. Teams of 2–4 choose Hardware, Software, or Open Innovation, register through Unstop, and submit a concise idea presentation for evaluation.</p>
+          <p>Ideas are judged on innovation, feasibility, and impact. Shortlisted teams advance to the 24-hour on-campus Grand Finale at BMSIT&amp;M on 21–22 November 2026, where they build and pitch their solution. The ₹1,000 team fee applies only to shortlisted finalists.</p>
+        </div>
+        <div className="about-facts" aria-label="Bits2Wave highlights">
+          <div><strong>2–4</strong><span>Students per team</span></div>
+          <div><strong>3</strong><span>Innovation tracks</span></div>
+          <div><strong>6</strong><span>Slides maximum</span></div>
+          <div><strong>24</strong><span>Hours to build</span></div>
+        </div>
+      </div>
+
       <h2 className="h2 bang reveal">How It <span>Works</span></h2>
       <p className="sub reveal">Twenty-four hours to turn an idea into something that flies. Here's the loop every great hack goes through.</p>
       <div className="steps">

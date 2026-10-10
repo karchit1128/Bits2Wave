@@ -1,7 +1,7 @@
 const prizeTracks = [
-  { name: 'Hardware', tone: 'red', first: '₹15,000', second: '₹10,000' },
-  { name: 'Software', tone: 'blue', first: '₹15,000', second: '₹10,000' },
-  { name: 'Open Innovation', tone: 'gold', first: '₹6,000', second: '₹4,000' },
+  { name: 'Hardware', tone: 'red', amount: '₹30,000' },
+  { name: 'Software', tone: 'blue', amount: '₹30,000' },
+  { name: 'Open Innovation', tone: 'gold', amount: 'Surprise' },
 ];
 
 function TrophyIcon({ silver = false }) {
@@ -18,30 +18,25 @@ export default function Prizes() {
   return (
     <section id="prizes">
       <h2 className="h2 bang reveal">Prize <span>Pool</span></h2>
-      <p className="prize-sub reveal">A total of ₹60,000 up for grabs across three tracks!</p>
+      <p className="prize-sub reveal">₹30,000 prize pools for Hardware and Software, plus a surprise pool for Open Innovation!</p>
 
       <div className="prize-total-board reveal">
         <span className="prize-total-icon"><TrophyIcon /></span>
         <div>
           <strong>₹60,000</strong>
         </div>
-        <small>Total Prize Pool</small>
+        <small>Confirmed Prize Pool</small>
       </div>
 
       <div className="prize-cards">
         {prizeTracks.map((track, index) => (
           <article className={`prize-card prize-card-${track.tone} reveal`} key={track.name} style={{ transitionDelay: `${index * 0.1}s` }}>
             <h3>{track.name}</h3>
-            <div className="prize-board">
+            <div className="prize-board prize-board-single">
               <div className="prize-award">
                 <span className="prize-cup"><TrophyIcon /></span>
-                <strong>{track.first}</strong>
-                <small>1st Place</small>
-              </div>
-              <div className="prize-award">
-                <span className="prize-cup"><TrophyIcon silver /></span>
-                <strong>{track.second}</strong>
-                <small>2nd Place</small>
+                <strong>{track.amount}</strong>
+                <small>Prize Pool</small>
               </div>
             </div>
           </article>
