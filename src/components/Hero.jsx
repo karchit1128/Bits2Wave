@@ -9,7 +9,7 @@ export default function Hero() {
     
     let interval;
     if (d && h && m && s) {
-      const target = new Date('2026-10-30T23:59:00+05:30').getTime();
+      const target = new Date('2026-11-21T09:00:00+05:30').getTime();
       const tick = () => {
         let t = Math.max(0, target - Date.now());
         const f = n => String(n).padStart(2, '0');
