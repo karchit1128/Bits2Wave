@@ -218,13 +218,11 @@ nav ul a:hover:after {
   left: 0;
   height: clamp(34px, 5vw, 72px);
   pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    rgba(253, 243, 220, 0) 0%,
-    rgba(253, 243, 220, 0.32) 42%,
-    rgba(253, 243, 220, 0.78) 76%,
-    var(--cream) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(253, 243, 220, 0) 0%,
+      rgba(253, 243, 220, 0.32) 42%,
+      rgba(253, 243, 220, 0.78) 76%,
+      var(--cream) 100%);
 }
 
 .hero>* {
@@ -704,7 +702,7 @@ canvas {
   opacity: .075;
 }
 
-.who > img {
+.who>img {
   width: 84px;
   height: 84px;
   object-fit: contain;
@@ -778,8 +776,13 @@ canvas {
     height: 13px;
   }
 
-  .hint::before { right: calc(100% + 7px); }
-  .hint::after { left: calc(100% + 7px); }
+  .hint::before {
+    right: calc(100% + 7px);
+  }
+
+  .hint::after {
+    left: calc(100% + 7px);
+  }
 
   .cast {
     grid-template-columns: 1fr;
@@ -908,7 +911,7 @@ canvas {
   pointer-events: none;
 }
 
-.step-journey > path {
+.step-journey>path {
   fill: none;
   stroke: #ef3340;
   stroke-width: 2.8;
@@ -916,7 +919,7 @@ canvas {
   stroke-dasharray: 6 8;
 }
 
-.step-journey > .journey-middle {
+.step-journey>.journey-middle {
   stroke-width: 3.2;
 }
 
@@ -1672,7 +1675,7 @@ canvas {
   margin-inline: auto;
 }
 
-#faq > .h2 {
+#faq>.h2 {
   position: relative;
   z-index: 1;
   margin-bottom: 20px;
@@ -1746,6 +1749,7 @@ details p {
     min-height: 70px;
     padding: 10px 14px;
   }
+
   .org img {
     max-height: 50px;
     max-width: 140px;
@@ -2293,8 +2297,13 @@ footer::before {
 .contact-info {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 12px;
+  margin-top: 20px;
+}
+
+.footer-right .contact-info {
+  align-items: flex-end;
 }
 
 .contact-link {
@@ -2325,7 +2334,11 @@ footer::before {
 .socials {
   display: flex;
   gap: 15px;
-  margin-top: 30px;
+  margin-top: 20px;
+  justify-content: flex-start;
+}
+
+.footer-right .socials {
   justify-content: flex-end;
 }
 
@@ -2384,9 +2397,11 @@ footer::before {
 
   .footer-right,
   .contact-info,
-  .socials {
-    align-items: center;
-    justify-content: center;
+  .socials,
+  .footer-right .contact-info,
+  .footer-right .socials {
+    align-items: center !important;
+    justify-content: center !important;
     text-align: center;
     width: 100%;
   }
@@ -2488,9 +2503,11 @@ footer::before {
     gap: 15px 5px;
     margin: 22px auto 10px;
   }
+
   .hero .date {
     margin-top: 16px;
   }
+
   .hero .cta {
     margin-top: 25px;
   }
@@ -2622,9 +2639,20 @@ footer::before {
   display: none;
 }
 
-.hero .cd:nth-child(2)::before { display: none; }
-.hero .cd:nth-child(3)::before { left: -9px; transform: rotate(-20deg); }
-.hero .cd:nth-child(4)::before { right: -8px; left: auto; transform: rotate(-22deg); }
+.hero .cd:nth-child(2)::before {
+  display: none;
+}
+
+.hero .cd:nth-child(3)::before {
+  left: -9px;
+  transform: rotate(-20deg);
+}
+
+.hero .cd:nth-child(4)::before {
+  right: -8px;
+  left: auto;
+  transform: rotate(-22deg);
+}
 
 @media (max-width: 600px) {
   .hero .countdown {
@@ -2673,8 +2701,14 @@ footer::before {
     height: 14px;
   }
 
-  .hero .cd:nth-child(3)::before { left: -4px; }
-  .hero .cd:nth-child(4)::before { right: -4px; left: auto; }
+  .hero .cd:nth-child(3)::before {
+    left: -4px;
+  }
+
+  .hero .cd:nth-child(4)::before {
+    right: -4px;
+    left: auto;
+  }
 }
 
 @media (max-width: 600px) and (max-height: 700px) {
