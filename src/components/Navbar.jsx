@@ -59,7 +59,7 @@ export default function Navbar() {
         <li><a href="/#about" onClick={closeMenu}>About</a></li>
         <li><a href="/#tracks" onClick={closeMenu}>Tracks</a></li>
         <li><a href="/problem-statements?track=hardware" onClick={handleProblems}>Problems</a></li>
-        <li><a href="/results/" onClick={closeMenu}>Results</a></li>
+        <li><a href="/results/index.html" onClick={closeMenu}>Results</a></li>
         <li><a href="/#prizes" onClick={closeMenu}>Prizes</a></li>
         <li><a href="/#timeline" onClick={closeMenu}>Timeline</a></li>
         <li><a href="/#faq" onClick={closeMenu}>FAQ</a></li>
