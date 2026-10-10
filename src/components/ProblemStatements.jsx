@@ -63,7 +63,9 @@ export default function ProblemStatements() {
                 '--delay': `${Math.min(index, 15) * 35}ms`,
               }}
             >
-              <span className="ps-card-number">{ps.id.replace('PS', '').padStart(2, '0')}</span>
+              <span className="ps-card-number">
+                {ps.track === 'HARDWARE' ? 'HW-' : ps.track === 'SOFTWARE' ? 'SW-' : ps.track === 'HYBRID' ? 'HY-' : ''}{ps.id.replace('PS', '')}
+              </span>
               <span className="ps-feather" aria-hidden="true">⌁</span>
               <span className="ps-card-clouds" aria-hidden="true" />
               <span className="ps-card-scenery" aria-hidden="true"><i /><i /><i /></span>
