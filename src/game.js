@@ -1,76 +1,76 @@
-// ===== Character drawing =====
-const COL = { blue: ['#1e88e5', '#0d47a1'], yellow: ['#fbc02d', '#c49000'], red: ['#e53935', '#8e1414'] };
 function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath() }
-function drawBot(c, x, y, r, type, rot, t) {
-    const [f, dk] = COL[type]; c.save(); c.translate(x, y); c.rotate(rot || 0);
-    // antenna
-    c.strokeStyle = dk; c.lineWidth = r * .14; c.beginPath(); c.moveTo(0, -r * .9); c.lineTo(r * .15, -r * 1.45); c.stroke();
-    c.fillStyle = (Math.floor((t || 0) / 20) % 2) ? '#ff1744' : '#fff'; c.beginPath(); c.arc(r * .15, -r * 1.5, r * .2, 0, 7); c.fill();
-    // side ears / bolts
-    c.fillStyle = dk; rr(c, -r * 1.12, -r * .3, r * .24, r * .6, r * .08); c.fill(); rr(c, r * .88, -r * .3, r * .24, r * .6, r * .08); c.fill();
-    // body
-    c.fillStyle = f; c.strokeStyle = '#0b1f3a'; c.lineWidth = Math.max(1.5, r * .1); rr(c, -r, -r * .95, r * 2, r * 1.85, r * .45); c.fill(); c.stroke();
-    // screen face
-    c.fillStyle = '#10213b'; rr(c, -r * .7, -r * .6, r * 1.4, r * .85, r * .22); c.fill();
-    // LED eyes (determined slanted bars)
-    c.fillStyle = '#00e5ff'; c.shadowColor = '#00e5ff'; c.shadowBlur = r * .5;
-    c.save(); c.translate(-r * .32, -r * .2); c.rotate(.25); c.fillRect(-r * .18, -r * .1, r * .36, r * .2); c.restore();
-    c.save(); c.translate(r * .32, -r * .2); c.rotate(-.25); c.fillRect(-r * .18, -r * .1, r * .36, r * .2); c.restore();
-    c.shadowBlur = 0;
-    // grille
-    c.fillStyle = dk; for (let i = -1; i <= 1; i++)c.fillRect(i * r * .3 - r * .1, r * .42, r * .2, r * .22);
-    c.restore()
-}
-const GP = ["..1..1..", "..1111..", ".111111.", "11211211", "11111111", "11333311", ".111111.", ".1.11.1."];
-function drawGremlin(c, x, y, r, t) {
-    const px = r * 2 / 8, ox = x - r, oy = y - r, gl = Math.random() < .08;
-    if (gl) { c.globalAlpha = .6; paint(c, ox + px * .6, oy, px, '#00e5ff', false); c.globalAlpha = 1 }
-    paint(c, ox, oy, px, null, gl)
-}
-function paint(c, ox, oy, px, mono, gl) {
-    const pal = { 1: '#7b1fa2', 2: '#76ff03', 3: '#fff' };
-    GP.forEach((row, j) => {
-        const sh = gl && Math.random() < .35 ? (Math.random() - .5) * px * 2.5 : 0;
-        [...row].forEach((ch, i) => { if (ch === '.') return; c.fillStyle = mono || pal[ch]; c.fillRect(ox + i * px + sh, oy + j * px, px + .5, px + .5) })
-    })
+// ===== Illustrated game assets =====
+const assetPaths = {
+    arena: '/play-arena-bg-v1.png',
+    arenaMobile: '/play-arena-mobile-v1.png',
+    blue: '/play-red-bird-v1.png',
+    yellow: '/play-yellow-bird-v1.png',
+    red: '/play-black-bird-v1.png',
+    gremlin: '/play-green-pig-v2.png',
+};
+
+function drawCover(c, image, width, height) {
+    const imageRatio = image.naturalWidth / image.naturalHeight;
+    const canvasRatio = width / height;
+    let sourceX = 0, sourceY = 0, sourceWidth = image.naturalWidth, sourceHeight = image.naturalHeight;
+    if (imageRatio > canvasRatio) {
+        sourceWidth = image.naturalHeight * canvasRatio;
+        sourceX = (image.naturalWidth - sourceWidth) / 2;
+    } else {
+        sourceHeight = image.naturalWidth / canvasRatio;
+        sourceY = (image.naturalHeight - sourceHeight) / 2;
+    }
+    c.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, width, height);
 }
 
-export function initCast() {
-    let animFrames = [];
-    document.querySelectorAll('.who canvas').forEach(cv => {
-        const c = cv.getContext('2d'), tp = cv.dataset.bot; let t = 0;
-        function a() {
-            c.clearRect(0, 0, 128, 128); 
-            if (tp === 'gremlin') drawGremlin(c, 64, 64, 40, t); 
-            else drawBot(c, 64, 72, 38, tp, Math.sin(t / 30) * .08, t); 
-            t++; 
-            animFrames.push(requestAnimationFrame(a));
-        }
-        a();
-    });
-    return () => animFrames.forEach(cancelAnimationFrame);
+const assets = Object.fromEntries(Object.entries(assetPaths).map(([key, src]) => {
+    const image = new Image();
+    image.src = src;
+    return [key, image];
+}));
+
+function drawImageSprite(c, image, x, y, radius, rotation = 0, scale = 2.45) {
+    if (!image?.complete || !image.naturalWidth) return false;
+    const size = radius * scale;
+    c.save();
+    c.translate(x, y);
+    c.rotate(rotation);
+    c.drawImage(image, -size / 2, -size / 2, size, size);
+    c.restore();
+    return true;
+}
+
+function drawBird(c, x, y, r, type, rot = 0) {
+    if (drawImageSprite(c, assets[type], x, y, r, rot)) return;
+    c.save(); c.translate(x, y); c.rotate(rot); c.fillStyle = type === 'yellow' ? '#ffd51f' : type === 'red' ? '#20242d' : '#ef2029';
+    c.strokeStyle = '#101a29'; c.lineWidth = Math.max(2, r * .12); c.beginPath(); c.arc(0, 0, r, 0, Math.PI * 2); c.fill(); c.stroke(); c.restore();
+}
+
+function drawPig(c, x, y, r) {
+    if (drawImageSprite(c, assets.gremlin, x, y, r, 0, 2.55)) return;
+    c.fillStyle = '#68ca20'; c.strokeStyle = '#153b0b'; c.lineWidth = Math.max(2, r * .12); c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.fill(); c.stroke();
 }
 
 export function initGame(cv) {
     const ctx = cv.getContext('2d');
-    let W, H, ground, sc, anchor, ready, projs, queue, blocks, grem, score, state, parts, timer, T = 0;
+    let W, H, ground, sc, anchor, ready, projs, queue, blocks, grem, score, state, parts, timer;
     const g = .35, scoreEl = document.getElementById('score'), shotsEl = document.getElementById('shots'), msg = document.getElementById('msg'), msgText = document.getElementById('msgText');
 
     let animFrame;
 
-    function resize() { 
-        const r = cv.parentElement.getBoundingClientRect(), dpr = window.devicePixelRatio || 1; 
-        W = r.width; H = r.height; 
-        cv.width = W * dpr; cv.height = H * dpr; 
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); 
-        build() 
+    function resize() {
+        const r = cv.parentElement.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+        W = r.width; H = r.height;
+        cv.width = W * dpr; cv.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        build()
     }
-    
+
     function bot(type) { return { x: anchor.x, y: anchor.y, vx: 0, vy: 0, r: (type === 'red' ? 19 : 15) * sc, type, st: 'ready', idle: 0, used: false, main: true } }
     function build() {
         clearTimeout(timer); timer = null;
-        sc = Math.min(1, W / 750); ground = H - 40;
-        anchor = { x: 70 + 100 * sc, y: ground - 115 * sc };
+        sc = Math.min(1, W / 750); ground = H * .84;
+        anchor = { x: Math.max(76, W * .2), y: ground - 105 * sc };
         queue = ['blue', 'yellow', 'red']; ready = bot(queue.shift()); projs = [];
         blocks = []; grem = []; parts = []; score = 0; state = 'play';
         const x0 = W - 320 * sc, P = 18 * sc, L = 150 * sc, B = 16 * sc;
@@ -87,12 +87,12 @@ export function initGame(cv) {
     function pos(e) { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top } }
     function burst(x, y, c, n) { for (let i = 0; i < n; i++)parts.push({ x, y, vx: (Math.random() - .5) * 7, vy: (Math.random() - .8) * 7, l: 40, c }) }
     function power(b) {
-        b.used = true; burst(b.x, b.y, '#00e5ff', 10);
+        b.used = true; burst(b.x, b.y, b.type === 'yellow' ? '#ffd51f' : '#ef2535', 10);
         if (b.type === 'blue') { for (const k of [-1, 1]) projs.push({ ...b, vy: b.vy + k * 3, main: false, r: b.r * .85 }); b.r *= .85 }
         else if (b.type === 'yellow') { b.vx *= 2; b.vy *= 1.6 }
         else { b.vx *= .3; b.vy = 14 * sc + 4 }
     }
-    
+
     const onPointerDown = e => {
         const p = pos(e);
         if (ready && ready.st === 'ready' && Math.hypot(p.x - ready.x, p.y - ready.y) < 50) { ready.st = 'drag'; cv.setPointerCapture(e.pointerId); return }
@@ -106,21 +106,20 @@ export function initGame(cv) {
         if (Math.hypot(ready.vx, ready.vy) < 2) { ready.x = anchor.x; ready.y = anchor.y; ready.st = 'ready'; return }
         ready.st = 'fly'; projs.push(ready); ready = null; ui()
     };
-    
+
     cv.addEventListener('pointerdown', onPointerDown);
     cv.addEventListener('pointermove', onPointerMove);
     cv.addEventListener('pointerup', onPointerUp);
-    
+
     const resetBtn = document.getElementById('reset');
-    if(resetBtn) resetBtn.onclick = build;
+    if (resetBtn) resetBtn.onclick = build;
 
     function supported(y, x1, x2, self) { if (y >= ground - 1) return true; return blocks.some(b => b !== self && !b.mv && Math.abs(b.y - y) < 2 && b.x < x2 && b.x + b.w > x1) }
     function overlap(a, b) { return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y }
     function knock(b, vx, vy) { if (b.mv) return; b.mv = true; b.vx = vx; b.vy = vy; b.va = (Math.random() - .5) * (b.stone ? .06 : .15); score += 50; ui() }
-    function crash(u) { if (u.st === 'pop') return; u.st = 'pop'; score += 500; ui(); for (let i = 0; i < 16; i++)parts.push({ x: u.x, y: u.y, vx: (Math.random() - .5) * 8, vy: (Math.random() - .8) * 8, l: 45, c: i % 3 ? '#7b1fa2' : '#76ff03', sq: true }) }
+    function crash(u) { if (u.st === 'pop') return; u.st = 'pop'; score += 500; ui(); for (let i = 0; i < 16; i++)parts.push({ x: u.x, y: u.y, vx: (Math.random() - .5) * 8, vy: (Math.random() - .8) * 8, l: 45, c: i % 3 ? '#75d523' : '#d9ff42', sq: false }) }
 
     function step() {
-        T++;
         for (const b of projs) {
             if (b.st !== 'fly') continue;
             const heavy = b.type === 'red';
@@ -165,45 +164,56 @@ export function initGame(cv) {
     function rack(k) {
         ctx.save(); ctx.translate(k.x + k.w / 2, k.y + k.h / 2); ctx.rotate(k.a); const w = k.w, h = k.h;
         if (k.stone) {
-            ctx.fillStyle = '#9e9e9e'; ctx.strokeStyle = '#5f5f5f'; ctx.lineWidth = 2; ctx.fillRect(-w / 2, -h / 2, w, h); ctx.strokeRect(-w / 2, -h / 2, w, h);
-            ctx.fillStyle = '#7d7d7d'; for (let i = 0; i < 5; i++)ctx.fillRect(-w / 2 + ((i * 37) % w), -h / 2 + ((i * 23) % h), 3, 3)
+            ctx.fillStyle = '#a9aba6'; ctx.strokeStyle = '#3b4650'; ctx.lineWidth = Math.max(2, 2.2 * sc); rr(ctx, -w / 2, -h / 2, w, h, 3 * sc); ctx.fill(); ctx.stroke();
+            ctx.fillStyle = 'rgba(255,255,255,.24)'; ctx.fillRect(-w / 2 + 3 * sc, -h / 2 + 3 * sc, Math.max(2, w - 6 * sc), 3 * sc);
+            ctx.strokeStyle = 'rgba(70,75,75,.5)'; ctx.lineWidth = Math.max(1, sc); ctx.beginPath(); ctx.moveTo(-w * .18, -h * .28); ctx.lineTo(w * .08, -h * .04); ctx.lineTo(-w * .05, h * .2); ctx.stroke();
         }
         else {
-            ctx.fillStyle = '#455a64'; ctx.strokeStyle = '#1c2a31'; ctx.lineWidth = 2; ctx.fillRect(-w / 2, -h / 2, w, h); ctx.strokeRect(-w / 2, -h / 2, w, h);
-            if (h > w) { for (let y = -h / 2 + 8; y < h / 2 - 4; y += 12) { ctx.fillStyle = ((y * 7 + T) >> 4) % 3 ? '#00e676' : '#ff9100'; ctx.fillRect(-2, y, 4, 4) } }
-            else { ctx.fillStyle = '#90a4ae'; for (let x = -w / 2 + 6; x < w / 2 - 2; x += 18) { ctx.beginPath(); ctx.arc(x, 0, 1.8, 0, 7); ctx.fill() } }
+            ctx.fillStyle = '#a95c22'; ctx.strokeStyle = '#572b12'; ctx.lineWidth = Math.max(2, 2.4 * sc); rr(ctx, -w / 2, -h / 2, w, h, 3 * sc); ctx.fill(); ctx.stroke();
+            ctx.fillStyle = '#d58a3b'; ctx.fillRect(-w / 2 + 3 * sc, -h / 2 + 3 * sc, Math.max(2, w - 6 * sc), 3 * sc);
+            ctx.strokeStyle = 'rgba(86,40,15,.55)'; ctx.lineWidth = Math.max(1, sc); ctx.beginPath();
+            if (h > w) { ctx.moveTo(-w * .2, -h * .35); ctx.bezierCurveTo(w * .22, -h * .1, -w * .16, h * .12, w * .18, h * .34); }
+            else { ctx.moveTo(-w * .38, 0); ctx.bezierCurveTo(-w * .12, -h * .18, w * .1, h * .15, w * .38, -h * .05); }
+            ctx.stroke();
         }
         ctx.restore()
     }
-    function fork(side) { ctx.strokeStyle = '#8d5a2b'; ctx.lineWidth = 12 * sc; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(anchor.x, ground - 50 * sc); ctx.lineTo(anchor.x + side * 16 * sc, anchor.y); ctx.stroke() }
+    function fork(side) {
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = '#4e2a13'; ctx.lineWidth = 17 * sc; ctx.beginPath(); ctx.moveTo(anchor.x, ground - 48 * sc); ctx.lineTo(anchor.x + side * 18 * sc, anchor.y); ctx.stroke();
+        ctx.strokeStyle = '#a85a24'; ctx.lineWidth = 11 * sc; ctx.beginPath(); ctx.moveTo(anchor.x, ground - 48 * sc); ctx.lineTo(anchor.x + side * 18 * sc, anchor.y); ctx.stroke();
+        ctx.strokeStyle = '#d9893b'; ctx.lineWidth = 3 * sc; ctx.beginPath(); ctx.moveTo(anchor.x + side * 2 * sc, ground - 52 * sc); ctx.lineTo(anchor.x + side * 17 * sc, anchor.y + 2 * sc); ctx.stroke();
+        ctx.strokeStyle = '#b71c1c'; ctx.lineWidth = 7 * sc; ctx.beginPath(); ctx.moveTo(anchor.x + side * 15 * sc, anchor.y + 12 * sc); ctx.lineTo(anchor.x + side * 18 * sc, anchor.y); ctx.stroke();
+    }
     function draw() {
         ctx.clearRect(0, 0, W, H);
-        ctx.fillStyle = '#a5d6a7'; ctx.beginPath(); ctx.ellipse(W * .3, ground + 30, W * .4, 80, 0, Math.PI, 0); ctx.fill();
-        ctx.fillStyle = '#81c784'; ctx.beginPath(); ctx.ellipse(W * .8, ground + 40, W * .35, 100, 0, Math.PI, 0); ctx.fill();
-        ctx.fillStyle = '#4caf50'; ctx.fillRect(0, ground, W, H - ground); ctx.fillStyle = '#8d6e63'; ctx.fillRect(0, ground + 14, W, H);
+        const arena = W / H < 1.35 ? assets.arenaMobile : assets.arena;
+        if (arena.complete && arena.naturalWidth) drawCover(ctx, arena, W, H);
+        else { const sky = ctx.createLinearGradient(0, 0, 0, H); sky.addColorStop(0, '#55c2f5'); sky.addColorStop(.84, '#dff5ff'); sky.addColorStop(.85, '#8ccf32'); sky.addColorStop(1, '#754123'); ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H); }
         if (ready && ready.st === 'drag') {
             const k = .2 + .05 * (1 - sc); let x = ready.x, y = ready.y, vx = (anchor.x - ready.x) * k, vy = (anchor.y - ready.y) * k; ctx.fillStyle = 'rgba(255,255,255,.85)';
             for (let i = 0; i < 40; i++) { for (let j = 0; j < 2; j++) { vy += g; x += vx; y += vy } if (y > ground) break; ctx.beginPath(); ctx.arc(x, y, 3 - i * .05, 0, 7); ctx.fill() }
         }
         // waiting bots
-        queue.forEach((tp, i) => { const r = (tp === 'red' ? 17 : 13) * sc; drawBot(ctx, anchor.x - 55 * sc - i * 38 * sc, ground - r * .95, r, tp, 0, T) });
-        ctx.strokeStyle = '#8d5a2b'; ctx.lineWidth = 14 * sc; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(anchor.x, ground); ctx.lineTo(anchor.x, ground - 50 * sc); ctx.stroke();
+        queue.forEach((tp, i) => { const r = (tp === 'red' ? 17 : 14) * sc; drawBird(ctx, anchor.x - 58 * sc - i * 42 * sc, ground - r * 1.05, r, tp, 0) });
+        ctx.strokeStyle = '#4e2a13'; ctx.lineWidth = 19 * sc; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(anchor.x, ground); ctx.lineTo(anchor.x, ground - 50 * sc); ctx.stroke();
+        ctx.strokeStyle = '#9b501f'; ctx.lineWidth = 12 * sc; ctx.beginPath(); ctx.moveTo(anchor.x, ground); ctx.lineTo(anchor.x, ground - 50 * sc); ctx.stroke();
         fork(1);
         if (ready) { ctx.strokeStyle = '#c62828'; ctx.lineWidth = 5 * sc; ctx.beginPath(); ctx.moveTo(anchor.x + 16 * sc, anchor.y); ctx.lineTo(ready.x, ready.y); ctx.stroke() }
         for (const k of blocks) rack(k);
-        for (const u of grem) if (u.st !== 'pop') drawGremlin(ctx, u.x, u.y, u.r, T);
-        for (const b of projs) if (b.st === 'fly') drawBot(ctx, b.x, b.y, b.r, b.type, Math.atan2(b.vy, b.vx) * .35, T);
-        if (ready) drawBot(ctx, ready.x, ready.y, ready.r, ready.type, 0, T);
+        for (const u of grem) if (u.st !== 'pop') drawPig(ctx, u.x, u.y, u.r);
+        for (const b of projs) if (b.st === 'fly') drawBird(ctx, b.x, b.y, b.r, b.type, Math.atan2(b.vy, b.vx) * .35);
+        if (ready) drawBird(ctx, ready.x, ready.y, ready.r, ready.type, 0);
         if (ready) { ctx.strokeStyle = '#c62828'; ctx.lineWidth = 5 * sc; ctx.beginPath(); ctx.moveTo(ready.x, ready.y); ctx.lineTo(anchor.x - 16 * sc, anchor.y); ctx.stroke() }
         fork(-1);
         for (const p of parts) { ctx.globalAlpha = p.l / 45; ctx.fillStyle = p.c; ctx.fillRect(p.x, p.y, p.sq ? 5 : 4, p.sq ? 5 : 4) } ctx.globalAlpha = 1;
     }
     function loop() { step(); draw(); animFrame = requestAnimationFrame(loop) }
-    
-    window.addEventListener('resize', resize); 
-    
+
+    window.addEventListener('resize', resize);
+
     // start
-    resize(); 
+    resize();
     loop();
 
     return () => {
@@ -213,6 +223,6 @@ export function initGame(cv) {
         cv.removeEventListener('pointerdown', onPointerDown);
         cv.removeEventListener('pointermove', onPointerMove);
         cv.removeEventListener('pointerup', onPointerUp);
-        if(resetBtn) resetBtn.onclick = null;
+        if (resetBtn) resetBtn.onclick = null;
     }
 }

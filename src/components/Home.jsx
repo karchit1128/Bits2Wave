@@ -55,6 +55,9 @@ export default function Home() {
       <About />
       <Tracks />
       <Prizes />
+      <div className="wood-section-divider" aria-hidden="true">
+        <img src="/wood-section-divider-v1.png" alt="" />
+      </div>
       <Timeline />
       <FAQ />
       <Contact />
