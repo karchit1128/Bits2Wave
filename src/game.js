@@ -6,7 +6,7 @@ const assetPaths = {
     blue: '/play-red-bird-v1.png',
     yellow: '/play-yellow-bird-v1.png',
     red: '/play-black-bird-v1.png',
-    gremlin: '/play-green-pig-v1.png',
+    gremlin: '/play-green-pig-v2.png',
 };
 
 function drawCover(c, image, width, height) {
@@ -58,14 +58,14 @@ export function initGame(cv) {
 
     let animFrame;
 
-    function resize() { 
-        const r = cv.parentElement.getBoundingClientRect(), dpr = window.devicePixelRatio || 1; 
-        W = r.width; H = r.height; 
-        cv.width = W * dpr; cv.height = H * dpr; 
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); 
-        build() 
+    function resize() {
+        const r = cv.parentElement.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+        W = r.width; H = r.height;
+        cv.width = W * dpr; cv.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        build()
     }
-    
+
     function bot(type) { return { x: anchor.x, y: anchor.y, vx: 0, vy: 0, r: (type === 'red' ? 19 : 15) * sc, type, st: 'ready', idle: 0, used: false, main: true } }
     function build() {
         clearTimeout(timer); timer = null;
@@ -92,7 +92,7 @@ export function initGame(cv) {
         else if (b.type === 'yellow') { b.vx *= 2; b.vy *= 1.6 }
         else { b.vx *= .3; b.vy = 14 * sc + 4 }
     }
-    
+
     const onPointerDown = e => {
         const p = pos(e);
         if (ready && ready.st === 'ready' && Math.hypot(p.x - ready.x, p.y - ready.y) < 50) { ready.st = 'drag'; cv.setPointerCapture(e.pointerId); return }
@@ -106,13 +106,13 @@ export function initGame(cv) {
         if (Math.hypot(ready.vx, ready.vy) < 2) { ready.x = anchor.x; ready.y = anchor.y; ready.st = 'ready'; return }
         ready.st = 'fly'; projs.push(ready); ready = null; ui()
     };
-    
+
     cv.addEventListener('pointerdown', onPointerDown);
     cv.addEventListener('pointermove', onPointerMove);
     cv.addEventListener('pointerup', onPointerUp);
-    
+
     const resetBtn = document.getElementById('reset');
-    if(resetBtn) resetBtn.onclick = build;
+    if (resetBtn) resetBtn.onclick = build;
 
     function supported(y, x1, x2, self) { if (y >= ground - 1) return true; return blocks.some(b => b !== self && !b.mv && Math.abs(b.y - y) < 2 && b.x < x2 && b.x + b.w > x1) }
     function overlap(a, b) { return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y }
@@ -209,11 +209,11 @@ export function initGame(cv) {
         for (const p of parts) { ctx.globalAlpha = p.l / 45; ctx.fillStyle = p.c; ctx.fillRect(p.x, p.y, p.sq ? 5 : 4, p.sq ? 5 : 4) } ctx.globalAlpha = 1;
     }
     function loop() { step(); draw(); animFrame = requestAnimationFrame(loop) }
-    
-    window.addEventListener('resize', resize); 
-    
+
+    window.addEventListener('resize', resize);
+
     // start
-    resize(); 
+    resize();
     loop();
 
     return () => {
@@ -223,6 +223,6 @@ export function initGame(cv) {
         cv.removeEventListener('pointerdown', onPointerDown);
         cv.removeEventListener('pointermove', onPointerMove);
         cv.removeEventListener('pointerup', onPointerUp);
-        if(resetBtn) resetBtn.onclick = null;
+        if (resetBtn) resetBtn.onclick = null;
     }
 }

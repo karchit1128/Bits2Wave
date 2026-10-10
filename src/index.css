@@ -700,8 +700,8 @@ canvas {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: url('/play-arena-bg-v1.png') right bottom / auto 100% no-repeat;
-  opacity: .09;
+  background: url('/play-arena-bg-v1.png') center bottom / cover no-repeat;
+  opacity: .075;
 }
 
 .who > img {
@@ -1185,13 +1185,18 @@ canvas {
 }
 
 .prize-total-board small {
-  margin-top: 3px;
+  position: absolute;
+  bottom: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
   font-family: 'Bangers', cursive;
-  font-size: 13px;
+  font-size: 14px;
   font-style: italic;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   line-height: 1;
   text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(75, 28, 6, 0.4);
 }
 
 .prize-cards {

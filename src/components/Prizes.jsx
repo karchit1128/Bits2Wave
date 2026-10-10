@@ -24,8 +24,8 @@ export default function Prizes() {
         <span className="prize-total-icon"><TrophyIcon /></span>
         <div>
           <strong>₹60,000</strong>
-          <small>Total Prize Pool</small>
         </div>
+        <small>Total Prize Pool</small>
       </div>
 
       <div className="prize-cards">
