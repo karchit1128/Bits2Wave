@@ -4,7 +4,6 @@ import './index.css';
 import NotFound from './components/NotFound';
 import Home from './components/Home';
 import ProblemStatements from './components/ProblemStatements';
-import Results from './components/Results';
 
 const validHashes = ['', '#top', '#play', '#about', '#tracks', '#prizes', '#timeline', '#faq', '#contact'];
 
@@ -34,15 +33,6 @@ function App() {
     return (
       <>
         <ProblemStatements />
-        <Analytics />
-      </>
-    );
-  }
-
-  if (currentPath === '/results' || currentPath === '/result') {
-    return (
-      <>
-        <Results />
         <Analytics />
       </>
     );

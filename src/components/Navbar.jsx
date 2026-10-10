@@ -38,13 +38,6 @@ export default function Navbar() {
     window.dispatchEvent(new Event('popstate'));
   };
 
-  const handleResults = (e) => {
-    e.preventDefault();
-    closeMenu();
-    window.history.pushState({}, '', '/results');
-    window.dispatchEvent(new Event('popstate'));
-  };
-
   return (
     <nav ref={navRef} className={menuOpen ? 'menu-open' : ''}>
       <a href="/#top" className="logo bang">BITS<span>2</span>WAVE</a>
@@ -66,7 +59,7 @@ export default function Navbar() {
         <li><a href="/#about" onClick={closeMenu}>About</a></li>
         <li><a href="/#tracks" onClick={closeMenu}>Tracks</a></li>
         <li><a href="/problem-statements?track=hardware" onClick={handleProblems}>Problems</a></li>
-        <li><a href="/results" onClick={handleResults}>Results</a></li>
+        <li><a href="/results/" onClick={closeMenu}>Results</a></li>
         <li><a href="/#prizes" onClick={closeMenu}>Prizes</a></li>
         <li><a href="/#timeline" onClick={closeMenu}>Timeline</a></li>
         <li><a href="/#faq" onClick={closeMenu}>FAQ</a></li>
