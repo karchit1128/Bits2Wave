@@ -4,7 +4,6 @@ export default function Footer() {
       <div className="footer-content wrap">
         <div className="footer-left">
           <div className="comsoc-brand">
-            <img src="/comsoc.png" alt="IEEE ComSoc" className="comsoc-logo" />
             <div className="comsoc-text">
               <h3 className="bang">IEEE COMSOC</h3>
               <p className="bmsit-text">BMSIT&amp;M</p>
