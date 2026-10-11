@@ -84,7 +84,7 @@ export default function ProblemStatements() {
             </button>
           ))}
         </div>
-        <p className="ps-endnote">Pick a challenge. Build something that matters.</p>
+        <p className="ps-endnote">Pick a challenge. Build something that matters. Have your own idea? Participate under <strong>Open Innovation</strong> using PS Code <strong>OI</strong>.</p>
       </section>
 
       <Footer />
