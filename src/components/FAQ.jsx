@@ -32,6 +32,10 @@ export default function FAQ() {
           <summary onClick={(e) => toggle(4, e)}>Is the hackathon online or offline?</summary>
           <p>It's a hybrid format! <strong>Round 1 (Idea Submission)</strong> is completely online. Only the shortlisted teams will be invited to our campus for the <strong>24-hour offline Grand Finale</strong> to build and present their prototypes in person.</p>
         </details>
+        <details open={openIndex === 5}>
+          <summary onClick={(e) => toggle(5, e)}>What is the Problem Statement Code for Open Innovation?</summary>
+          <p>For Open Innovation, write <strong>OI</strong> as the <em>Problem Statement Code</em> in your PPT template. For the <em>Problem Statement Title</em>, write your own project or idea title.</p>
+        </details>
       </div>
     </section>
   );

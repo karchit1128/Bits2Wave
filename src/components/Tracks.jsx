@@ -1,4 +1,22 @@
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import './ProblemStatements.css';
+
 export default function Tracks() {
+  const [showOIModal, setShowOIModal] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = showOIModal ? 'hidden' : '';
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setShowOIModal(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [showOIModal]);
+
   return (
     <section id="tracks">
       <h2 className="h2 bang reveal">Pick Your <span>Track</span></h2>
@@ -16,12 +34,72 @@ export default function Tracks() {
           <p>Web, mobile, AI/ML, networking and communication systems. Code that solves real problems.</p>
           <span className="track-arrow" aria-hidden="true">→</span>
         </a>
-        <div className="track track-innovation reveal">
+        <button
+          type="button"
+          onClick={() => setShowOIModal(true)}
+          className="track track-innovation reveal"
+          aria-haspopup="dialog"
+          aria-expanded={showOIModal}
+        >
           <div className="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" /></svg></div>
           <h3>Open Innovation</h3>
           <p>No boundaries. Bring your boldest idea, from any domain, and make it fly.</p>
-        </div>
+          <span className="track-arrow" aria-hidden="true">→</span>
+        </button>
       </div>
+
+      {showOIModal && typeof document !== 'undefined' && createPortal(
+        <div className="ps-modal-overlay" onMouseDown={() => setShowOIModal(false)} role="presentation">
+          <article
+            className="ps-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="ps-modal-title"
+            onMouseDown={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="ps-modal-close"
+              onClick={() => setShowOIModal(false)}
+              aria-label="Close problem statement"
+            >
+              ×
+            </button>
+
+            <div className="ps-modal-kicker">
+              <span>OI</span>
+              <span>OPEN INNOVATION</span>
+            </div>
+
+            <h2 id="ps-modal-title">Bring Your Own Problem</h2>
+
+            <div className="ps-modal-scene" aria-hidden="true">
+              <img src="/modal-scene-reference-v3.png" alt="" />
+            </div>
+
+            <div className="ps-modal-section">
+              <span className="ps-modal-section-icon ps-target-icon" aria-hidden="true">◎</span>
+              <div>
+                <h3>The challenge</h3>
+                <p>
+                  Identify any real-world challenge and build an innovative prototype using hardware, software, or hybrid tech. No boundaries or predefined restrictions.
+                </p>
+              </div>
+            </div>
+
+            <div className="ps-modal-section">
+              <span className="ps-modal-section-icon ps-document-icon" aria-hidden="true">▤</span>
+              <div>
+                <h3>Mission details</h3>
+                <p>
+                  Teams formulate their own problem statement. In your PPT submission template, write "OI" as the Problem Statement Code and your project's challenge title as the Problem Statement Title.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>,
+        document.body
+      )}
     </section>
   );
 }
